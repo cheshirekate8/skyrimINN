@@ -9,16 +9,16 @@ const router = express.Router();
 router.post(
     '/',
     asyncHandler(async (req, res) => {
-      const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
+        const { email, password, username } = req.body;
+        const user = await User.signup({ email, username, password });
 
-      await setTokenCookie(res, user);
+        await setTokenCookie(res, user);
 
-      return res.json({
-        user,
-      });
+        return res.json({
+            user,
+        });
     }),
-  );
+);
 
 
 
