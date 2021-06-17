@@ -1,10 +1,10 @@
-// frontend/src/components/SignupFormPage/index.js
+// frontend/src/components/SignupFormModal/SignupForm.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
-function SignupFormPage() {
+function SignupForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -30,7 +30,8 @@ function SignupFormPage() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
+      <ul
+      hidden={!!errors}>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
@@ -74,4 +75,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignupForm;
