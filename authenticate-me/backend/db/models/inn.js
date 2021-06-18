@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     Inn.belongsTo(models.Location, { foreignKey : 'location_id'});
     Inn.belongsTo(models.Region, { foreignKey : 'region_id'});
     Inn.belongsTo(models.User, {foreignKey:'host_id'});
+    Inn.hasMany(models.Reservation, {foreignKey: 'inn_id'})
+    Inn.hasMany(models.Review, {foreignKey: 'inn_id'})
   };
   return Inn;
 };

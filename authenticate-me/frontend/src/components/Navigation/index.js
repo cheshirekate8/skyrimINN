@@ -28,7 +28,9 @@ function Navigation({ isLoaded }) {
   return (
     <nav>
       <NavLink exact to="/">
-        <img class='home-logo' src={SkyrimLogo} />
+        <button>
+          <i class="fas fa-dungeon"></i>
+        </button>
       </NavLink>
       {isLoaded && sessionLinks}
     </nav>

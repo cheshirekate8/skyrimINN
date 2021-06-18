@@ -105,6 +105,11 @@ module.exports = {
         username: 'Haran',
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
       },  //20
+      {
+        email: faker.internet.email(),
+        username: 'BragonDorn',
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },  //21
     ], {});
   },
 
@@ -112,7 +117,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Users', {
       username: { [Op.in]: ['Demo-lition','FakeUser1', 'FakeUser2', 'Iddra', 'Elda-Early-Dawn', 'Valga_Vinicia', 'Faida', 'Corpulus_Vinius','Jonna', 'Geldis_Sadri',
-      'Hadring', 'Thoring', 'Kleppr', 'Eydis', 'Keerava', 'Wilhelm','Mralki', 'Delphine', 'Hulda', 'Haran' ] }
+      'Hadring', 'Thoring', 'Kleppr', 'Eydis', 'Keerava', 'Wilhelm','Mralki', 'Delphine', 'Hulda', 'Haran', 'BragonDorn' ] }
     }, {});
   }
 };
