@@ -6,7 +6,6 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
-import SkyrimLogo from '../../images/Skyrim-Logo.png'
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
