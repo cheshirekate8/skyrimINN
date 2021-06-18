@@ -6,14 +6,15 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
+import SkyrimLogo from '../../images/Skyrim-Logo.png'
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <ProfileButton user={sessionUser}>Profile</ProfileButton>
     );
   } else {
     sessionLinks = (
@@ -25,14 +26,12 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          <button>Home</button>
-        </NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <nav>
+      <NavLink exact to="/">
+        <img class='home-logo' src={SkyrimLogo} />
+      </NavLink>
+      {isLoaded && sessionLinks}
+    </nav>
   );
 }
 

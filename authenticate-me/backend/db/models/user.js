@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len: [3, 30],
         isNotEmail(value) {
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len: [3, 256]
       },
@@ -47,9 +49,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
-  
+
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.Inn, {foreignKey: 'host_id'})
   };
 
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
