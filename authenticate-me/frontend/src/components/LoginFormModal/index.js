@@ -8,7 +8,9 @@ function LoginFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
+      <button onClick={() => setShowModal(true)}>
+        <i class="fas fa-feather"> Login</i>
+      </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <LoginForm />

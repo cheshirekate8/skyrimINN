@@ -29,10 +29,13 @@ function Navigation({ isLoaded }) {
     <nav>
       <NavLink exact to="/">
         <button>
-          <i class="fas fa-dungeon"></i>
+          <i class="fas fa-dungeon"> Home</i>
         </button>
       </NavLink>
-      {isLoaded && sessionLinks}
+      <p>SkyrimINN</p>
+      <div>
+        {isLoaded && sessionLinks}
+      </div>
     </nav>
   );
 }

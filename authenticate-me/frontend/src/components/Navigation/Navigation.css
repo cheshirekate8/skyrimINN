@@ -1,9 +1,6 @@
-.home-logo {
-    height: 40px;
-    width: 40px;
-}
-
 nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    background-color: aquamarine;
 }
