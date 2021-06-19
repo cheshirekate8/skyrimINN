@@ -3,30 +3,57 @@ nav {
     background-color: #1B2026;
     grid-template-columns: repeat(3, 1fr);
     box-shadow: 2px 2px 15px #BFAF8F, -2px 2px 15px #BFAF8F;
+    margin-bottom: 25px;
+}
+
+.left-nav,
+.center-nav,
+.right-nav {
+    display: flex;
+    align-items: center;
+
 }
 
 .left-nav {
     color: #F2F2F2;
     grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
 }
+
 .center-nav {
-    color: #F2F2F2;
     grid-column: 2;
-    grid-row: 1;
-    display: flex;
-    align-items: center;
+    color: #F2F2F2;
+    font-size: 40px;
+    font-family: 'MagicCards';
     justify-content: center;
+    padding-top: .3em;
+
 }
+
 .right-nav {
     color: #F2F2F2;
     grid-column: 3;
-    grid-row: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
     margin-right: 15px;
+}
+
+.clearButtons {
+    font-size: 20px;
+    background-color: transparent;
+    color: #F2F2F2;
+    border: transparent;
+    font-family: 'Arial';
+}
+
+.clearButtonsText {
+    font-family: 'TrajanRegular';
+}
+
+.homeButton {
+    margin: 10px;
+    font-size: 30px;
+}
+
+.formButton {
+    margin-top: 20px;
 }

@@ -8,8 +8,10 @@ function LoginFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>
-        <i class="fas fa-feather"> Login</i>
+      <button className="clearButtons" onClick={() => setShowModal(true)}>
+        <i class="fas fa-feather">
+        <div className='clearButtonsText'>Login</div>
+        </i>
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

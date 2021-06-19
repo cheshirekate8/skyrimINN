@@ -6,6 +6,20 @@
   * #BFAF8F - MILD GOLD
   * #F2F2F2 - OFF WHITE
 */
+
+@font-face {
+  font-family: 'MagicCards';
+  src: url('../src/fonts/magic_cards/MagicCardsNormal.ttf');
+}
+@font-face {
+  font-family: 'TrajanPro';
+  src: url('../src/fonts/trajanPro/Trajan\ Pro.ttf');
+}
+@font-face {
+  font-family: 'TrajanRegular';
+  src: url('../src/fonts/trajanPro/TrajanPro-Regular.ttf');
+}
+
 body {
   margin: 0;
   background-color: #080B0D;

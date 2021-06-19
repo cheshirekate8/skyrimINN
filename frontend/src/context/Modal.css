@@ -1,26 +1,41 @@
 /* frontend/src/context/Modal.css */
 #modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  #modal-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
+#modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
-  #modal-content {
-    position: absolute;
-    background-color:white;
-    padding: 10px;
-  }
+#modal-content {
+  position: absolute;
+  padding: 40px 40px 20px 40px;
+  border: 1px solid #bfaf8f;
+  box-shadow: 5px 5px 20px #bfaf8f, -5px 5px 20px #bfaf8f, 5px -5px 20px #bfaf8f,
+    -5px -5px 20px #bfaf8f;
+  border-radius: 20px;
+  color: #F2F2F2;
+  background-color: #1B2026;
+  font-family: 'TrajanRegular';
+}
+
+form {
+  flex-direction: column;
+}
+
+label {
+  width: 100%;
+  justify-content: space-between;
+}
