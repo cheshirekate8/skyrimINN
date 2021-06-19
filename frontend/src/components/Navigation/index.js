@@ -26,13 +26,15 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav>
-      <NavLink exact to="/">
-        <button>
-          <i class="fas fa-dungeon"> Home</i>
-        </button>
-      </NavLink>
-      <p>SkyrimINN</p>
-      <div>
+      <div class='left-nav'>
+        <NavLink exact to="/">
+          <button>
+            <i class="fas fa-dungeon"> Home</i>
+          </button>
+        </NavLink>
+      </div>
+      <h2 class='center-nav'>SkyrimINN</h2>
+      <div class='right-nav'>
         {isLoaded && sessionLinks}
       </div>
     </nav>
