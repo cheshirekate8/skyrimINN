@@ -29,7 +29,7 @@ function Navigation({ isLoaded }) {
       <div className='left-nav'>
         <NavLink exact to="/">
           <button className="clearButtons homeButton">
-            <i className="fas fa-dungeon"></i>
+            <i className="fas fa-dungeon soloButtons"></i>
           </button>
         </NavLink>
       </div>
