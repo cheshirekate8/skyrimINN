@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Splash from "./components/Splash/index"
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route path="/" exact>
-            {/* <SignupFormPage></SignupFormPage> */}
+            <Splash isLoaded={isLoaded} />
           </Route>
         </Switch>
       )}

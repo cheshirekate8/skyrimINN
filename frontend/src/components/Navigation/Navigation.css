@@ -3,7 +3,11 @@ nav {
     background-color: #1B2026;
     grid-template-columns: repeat(3, 1fr);
     box-shadow: 2px 2px 15px #BFAF8F, -2px 2px 15px #BFAF8F;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
+    width: 100vw;
+    top: 0;
+    position: fixed;
+    z-index: 10;
 }
 
 .left-nav,
@@ -11,7 +15,6 @@ nav {
 .right-nav {
     display: flex;
     align-items: center;
-
 }
 
 .left-nav {
