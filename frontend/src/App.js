@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import Splash from "./components/Splash/index"
-
+import Splash from "./components/Splash/index";
+import Footer from "./components/Footer";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -13,16 +13,20 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+
   return (
     <div>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route path="/" exact>
+        <div>
             <Splash isLoaded={isLoaded} />
-          </Route>
-        </Switch>
+            <Splash isLoaded={isLoaded} />
+            <Splash isLoaded={isLoaded} />
+            <Splash isLoaded={isLoaded} />
+            <Splash isLoaded={isLoaded} />
+        </div>
       )}
+      <Footer />
     </div>
   );
 }

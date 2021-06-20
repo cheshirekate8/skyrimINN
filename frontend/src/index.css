@@ -23,6 +23,12 @@
 body {
   margin: 0;
   background-color: #080B0D;
+  position: relative;
+  top: 75px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 form {

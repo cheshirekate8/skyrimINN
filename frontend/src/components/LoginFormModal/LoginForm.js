@@ -28,7 +28,7 @@ function LoginForm() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <label>
+      <label className='modal-label'>
         Username or Email
         <input
           type="text"
@@ -37,7 +37,7 @@ function LoginForm() {
           required
         />
       </label>
-      <label>
+      <label className='modal-label'>
         Password
         <input
           type="password"

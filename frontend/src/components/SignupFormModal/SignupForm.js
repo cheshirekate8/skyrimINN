@@ -34,7 +34,7 @@ function SignupForm() {
       hidden={!!errors}>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
+      <label className='modal-label'>
         Email
         <input
           type="text"
@@ -43,7 +43,7 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <label className='modal-label'>
         Username
         <input
           type="text"
@@ -52,7 +52,7 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <label className='modal-label'>
         Password
         <input
           type="password"
@@ -61,7 +61,7 @@ function SignupForm() {
           required
         />
       </label>
-      <label>
+      <label className='modal-label'>
         Confirm Password
         <input
           type="password"

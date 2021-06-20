@@ -1,0 +1,16 @@
+.footer {
+    background-color: aquamarine;
+    height: 35px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    z-index: 1;
+    background-color: #1B2026;
+    color: #f2f2f2;
+    box-shadow: -2px -2px 15px #BFAF8F, 2px -2px 15px #BFAF8F;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: 'TrajanRegular';
+    font-size: 20px;
+}

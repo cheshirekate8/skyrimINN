@@ -3,12 +3,18 @@ import { useSelector } from 'react-redux';
 import { usePhotoContext } from '../../context/PhotoContext';
 import './Splash.css'
 
-function Splash({ isLoaded }) {
+function Splash() {
     const { photoUrl } = usePhotoContext()
+
     return (
-        <div>
-            <div height='50px'/>
-            <img src={photoUrl} className='splashPhoto' />
+        <div className='splashComponent'>
+            <form className='booking-form'>
+                <label>
+                    Thing
+                    <input></input>
+                </label>
+
+            </form>
         </div>
     )
 }
