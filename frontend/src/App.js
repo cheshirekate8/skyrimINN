@@ -11,6 +11,7 @@ import RegionsComponent from "./components/SplashRegions";
 import LocationsComponent from "./components/SplashLocations";
 import InnsComponent from "./components/SplashInns";
 import InnPageComponent from "./components/InnPage";
+import InnsFromRegionComponent from "./components/RegionPage";
 
 
 
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path='/inns/:id'>
               <InnPageComponent />
+            </Route>
+            <Route path='/region/:id'>
+              <InnsFromRegionComponent />
             </Route>
           </Switch>
         </div>

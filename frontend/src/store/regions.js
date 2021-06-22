@@ -1,10 +1,16 @@
 import { csrfFetch } from './csrf';
 
 const LOAD = 'api/regions/LOAD'
+const LOAD_REGION_INNS = 'api/regions/inn/LOAD'
 
 const load = (list) => ({
     type: LOAD,
     list,
+});
+
+const loadRegionInns = (innsList) => ({
+    type: LOAD_REGION_INNS,
+    innsList,
 });
 
 export const getRegions = () => async dispatch => {
@@ -16,8 +22,18 @@ export const getRegions = () => async dispatch => {
     }
 };
 
+export const getInnsFromRegion = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/regions/${id}/inns`)
+
+    if (response.ok) {
+        const innsList = await response.json()
+        dispatch(loadRegionInns(innsList));
+    }
+}
+
 const initialState = {
-    list: []
+    list: [],
+    innsList: [],
   };
 
 const regionsReducer = (state = initialState, action) => {
@@ -32,6 +48,11 @@ const regionsReducer = (state = initialState, action) => {
                 ...state,
                 list: action.list,
             };
+        }
+        case LOAD_REGION_INNS: {
+            const newState = Object.assign({}, initialState);
+            newState.innsList = action.innsList;
+            return newState
         }
         default:
             return state;
