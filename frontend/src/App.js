@@ -4,8 +4,12 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import Splash from "./components/Splash/index";
 import Footer from "./components/Footer";
+import Splash from "./components/Splash/index";
+import RegionsComponent from "./components/Regions";
+
+
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,13 +24,12 @@ function App() {
       {isLoaded && (
         <div>
             <Splash isLoaded={isLoaded} />
-            <Splash isLoaded={isLoaded} />
-            <Splash isLoaded={isLoaded} />
-            <Splash isLoaded={isLoaded} />
+            <RegionsComponent />
             <Splash isLoaded={isLoaded} />
         </div>
       )}
       <Footer />
+      <div className='footerHider'></div>
     </div>
   );
 }

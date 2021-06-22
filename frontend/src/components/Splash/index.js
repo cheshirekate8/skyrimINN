@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { usePhotoContext } from '../../context/PhotoContext';
 import './Splash.css'
+import RegionsComponent from '../Regions';
 
 function Splash() {
     const { photoUrl } = usePhotoContext()
@@ -13,7 +14,6 @@ function Splash() {
                     Thing
                     <input></input>
                 </label>
-
             </form>
         </div>
     )
