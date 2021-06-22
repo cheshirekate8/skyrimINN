@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Splash from "./components/Splash/index";
 import RegionsComponent from "./components/SplashRegions";
 import LocationsComponent from "./components/SplashLocations";
+import InnsComponent from "./components/SplashInns";
 
 
 
@@ -27,7 +28,7 @@ function App() {
             <Splash isLoaded={isLoaded} />
             <RegionsComponent />
             <LocationsComponent/>
-            <Splash isLoaded={isLoaded} />
+            <InnsComponent />
         </div>
       )}
       <Footer />

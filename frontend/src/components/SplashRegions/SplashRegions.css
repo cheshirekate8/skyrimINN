@@ -1,11 +1,11 @@
-.outerDiv {
+.regionsOuterDiv {
     color: #f2f2f2;
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 3fr 1fr;
 }
 
-.left-div {
+.regions-left-div {
     grid-column: 2;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     text-align: center;
 }
 
-.right-div {
+.regions-right-div {
     grid-column: 4;
     display: flex;
     flex-direction: column;

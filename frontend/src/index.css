@@ -43,3 +43,7 @@ label {
   align-items: center;
   padding: 5px;
 }
+
+.footerHider {
+  height: 35px;
+}

@@ -14,4 +14,12 @@ router.get(
     }),
   )
 
+  router.get(
+    '/recent',
+    asyncHandler(async (req, res) => {
+      const inns = await Inn.findAll({limit: 15, order: [['id', 'DESC']] });
+      return res.json(inns)
+    }),
+  )
+
 module.exports = router;

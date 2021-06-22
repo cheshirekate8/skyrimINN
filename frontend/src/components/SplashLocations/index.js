@@ -15,14 +15,14 @@ const LocationsComponent = () => {
     const locations = useSelector(state => state.locations.list)
 
     return (
-        <div className='outerDiv'>
-            <div className='left-div'>
+        <div className='locationsOuterDiv'>
+            <div className='locations-left-div'>
                 <h1>Make memories in New Cities!</h1>
                 <ul>
                     {locations.map((location) => (<li>{location.name}</li>))}
                 </ul>
             </div>
-            <div className='right-div'>
+            <div className='locations-right-div'>
                 <img className='city' src={SolitudeLandscape}/>
             </div>
         </div>

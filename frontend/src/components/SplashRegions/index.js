@@ -15,11 +15,11 @@ const RegionsComponent = () => {
     const regions = useSelector(state => state.regions.list)
 
     return (
-        <div className='outerDiv'>
-            <div className='left-div'>
+        <div className='regionsOuterDiv'>
+            <div className='regions-left-div'>
                 <img className='parchmentMap' src={parchmentMap} />
             </div>
-            <div className='right-div'>
+            <div className='regions-right-div'>
                 <h1>Rediscover the Regions of Skyrim...</h1>
                 <ul>
                     {regions.map((region) => (<li>{region.name}</li>))}
