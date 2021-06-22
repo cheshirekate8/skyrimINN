@@ -18,9 +18,7 @@ const LocationsComponent = () => {
         <div className='locationsOuterDiv'>
             <div className='locations-left-div'>
                 <h1>Make memories in New Cities!</h1>
-                <ul>
-                    {locations.map((location) => (<li>{location.name}</li>))}
-                </ul>
+                {locations.map((location) => (<Link to={`location/${location.id}`}>{location.name}</Link>))}
             </div>
             <div className='locations-right-div'>
                 <img className='city' src={SolitudeLandscape}/>
