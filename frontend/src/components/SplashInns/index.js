@@ -16,7 +16,7 @@ const InnsComponent = () => {
     return (
         <div className='innsOuterDiv'>
             <h2 id='recentInnsTitle'>Check out the latest Inns!</h2>
-                {recentInns.map((inn, i) => (<li id={`inn-${i+1}`}>{inn.name}</li>))}
+                {recentInns.map((inn, i) => (<Link to='' id={`inn-${i+1}`}>{inn.name}</Link>))}
         </div>
     )
 }

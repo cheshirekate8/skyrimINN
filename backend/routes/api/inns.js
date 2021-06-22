@@ -7,19 +7,27 @@ const { Inn } = require('../../db/models');
 const router = express.Router();
 
 router.get(
-    '/',
-    asyncHandler(async (req, res) => {
-      const inns = await Inn.findAll();
-      return res.json(inns)
-    }),
+  '/',
+  asyncHandler(async (req, res) => {
+    const inns = await Inn.findAll();
+    return res.json(inns)
+  }),
+)
+
+router.get(
+  '/recent',
+  asyncHandler(async (req, res) => {
+    const inns = await Inn.findAll({ limit: 15, order: [['id', 'DESC']] });
+    return res.json(inns)
+  }),
   )
 
   router.get(
-    '/recent',
+    '/:id',
     asyncHandler(async (req, res) => {
-      const inns = await Inn.findAll({limit: 15, order: [['id', 'DESC']] });
-      return res.json(inns)
-    }),
-  )
+      const inn = await Inn.findByPk(req.params.id)
+      return res.json(inn)
+  }),
+)
 
 module.exports = router;
