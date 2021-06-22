@@ -6,7 +6,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Splash from "./components/Splash/index";
-import RegionsComponent from "./components/Regions";
+import RegionsComponent from "./components/SplashRegions";
+import LocationsComponent from "./components/SplashLocations";
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <div>
             <Splash isLoaded={isLoaded} />
             <RegionsComponent />
+            <LocationsComponent/>
             <Splash isLoaded={isLoaded} />
         </div>
       )}

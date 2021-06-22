@@ -1,0 +1,30 @@
+.outerDiv {
+    color: #f2f2f2;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 3fr 1fr;
+}
+
+.left-div {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.right-div {
+    grid-column: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.city {
+    width: 40vw;
+    margin: 40px 0 40px 0;
+    border: 8px groove
+}
