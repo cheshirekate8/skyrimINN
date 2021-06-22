@@ -23,7 +23,7 @@ router.get(
   )
 
   router.get(
-    '/:id',
+    '/:id(\\d+)',
     asyncHandler(async (req, res) => {
       const inn = await Inn.findByPk(req.params.id)
       return res.json(inn)

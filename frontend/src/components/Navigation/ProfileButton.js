@@ -32,7 +32,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button className='clearButtons' onClick={openMenu}>
-        <i class="fas fa-dragon soloButtons"></i>
+        <i className="fas fa-dragon soloButtons"></i>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">

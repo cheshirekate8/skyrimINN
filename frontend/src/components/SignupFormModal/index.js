@@ -9,7 +9,7 @@ function SignupFormModal() {
   return (
     <>
       <button className="clearButtons" onClick={() => setShowModal(true)}>
-      <i class="fas fa-feather-alt">
+      <i className="fas fa-feather-alt">
         <div className='clearButtonsText'>Signup</div></i>
       </button>
       {showModal && (

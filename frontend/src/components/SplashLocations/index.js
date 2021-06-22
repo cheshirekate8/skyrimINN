@@ -10,7 +10,7 @@ const LocationsComponent = () => {
 
     useEffect(() => {
         dispatch(getLocations())
-    }, dispatch)
+    }, [dispatch])
 
     const locations = useSelector(state => state.locations.list)
 
@@ -18,7 +18,7 @@ const LocationsComponent = () => {
         <div className='locationsOuterDiv'>
             <div className='locations-left-div'>
                 <h1>Make memories in New Cities!</h1>
-                {locations.map((location) => (<Link to={`location/${location.id}`}>{location.name}</Link>))}
+                {locations.map((location) => (<Link to={`location/${location.id}`} key={location.id}>{location.name}</Link>))}
             </div>
             <div className='locations-right-div'>
                 <img className='city' src={SolitudeLandscape}/>

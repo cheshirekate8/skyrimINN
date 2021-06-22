@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const LOAD = 'api/inns/LOAD'
 const LOAD_RECENT = 'api/inns/LOAD'
+const LOAD_ONE = 'api/inns/id'
 
 const load = (list) => ({
     type: LOAD,
@@ -13,8 +14,13 @@ const loadRecent = (list) => ({
     list,
 });
 
+const loadOne = (inn) => ({
+    type: LOAD_ONE,
+    inn
+})
+
 export const getInns = () => async dispatch => {
-    const response = await fetch('api/inns');
+    const response = await csrfFetch('/api/inns');
 
     if (response.ok) {
         const list = await response.json();
@@ -23,16 +29,26 @@ export const getInns = () => async dispatch => {
 }
 
 export const getRecentInns = () => async dispatch => {
-    const response = await fetch('api/inns/recent');
+    const response = await csrfFetch('/api/inns/recent');
 
     if (response.ok) {
         const list = await response.json();
-        dispatch(load(list));
+        dispatch(loadRecent(list));
+      }
+}
+
+export const getOneInn = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/inns/${id}`);
+
+    if (response.ok) {
+        const inn = await response.json();
+        dispatch(loadOne(inn));
       }
 }
 
 const initialState = {
-    list: []
+    list: [],
+    currentInn: null,
   };
 
 const innsReducer = (state = initialState, action) => {
@@ -58,6 +74,12 @@ const innsReducer = (state = initialState, action) => {
                 ...state,
                 list: action.list,
             };
+        }
+        case LOAD_ONE: {
+            const newState = Object.assign({}, initialState);
+            newState.currentInn = action.inn;
+            return newState;
+
         }
         default:
             return state;
