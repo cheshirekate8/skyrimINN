@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { Link, Route, useParams } from 'react-router-dom';
 import { getInnsFromRegion } from '../../store/regions';
 import './RegionPage.css'
 
@@ -18,7 +18,7 @@ function InnsFromRegionComponent() {
         return (
             <div className='region-div'>
                 <h1>
-                    {innsList.map(inn => <div>{inn.name}</div>)}
+                    {innsList.map(inn => <Link to={`/inns/${inn.id}`}>{inn.name}</Link>)}
                 </h1>
             </div>
         )

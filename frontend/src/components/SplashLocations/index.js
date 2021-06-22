@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Route, useParams } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { getLocations } from '../../store/locations';
 import './SplashLocations.css';
 import SolitudeLandscape from '../../images/SolitudeLandscape.jpg'
