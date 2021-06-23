@@ -1,10 +1,16 @@
 import { csrfFetch } from './csrf';
 
 const LOAD = 'api/locations/LOAD'
+const LOAD_LOCATIONS_INNS = 'api/locations/inn/LOAD'
 
 const load = (list) => ({
     type: LOAD,
     list,
+});
+
+const loadLocationInns = (innsList) => ({
+    type: LOAD_LOCATIONS_INNS,
+    innsList,
 });
 
 export const getLocations = () => async dispatch => {
@@ -16,8 +22,18 @@ export const getLocations = () => async dispatch => {
     }
 };
 
+export const getInnsFromLocation = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/locations/${id}/inns`)
+
+    if (response.ok) {
+        const innsList = await response.json()
+        dispatch(loadLocationInns(innsList));
+    }
+}
+
 const initialState = {
-    list: []
+    list: [],
+    innsList: [],
   };
 
 const locationsReducer = (state = initialState, action) => {
@@ -32,6 +48,11 @@ const locationsReducer = (state = initialState, action) => {
                 ...state,
                 list: action.list,
             };
+        }
+        case LOAD_LOCATIONS_INNS: {
+            const newState = Object.assign({}, initialState);
+            newState.innsList = action.innsList;
+            return newState
         }
         default:
             return state;

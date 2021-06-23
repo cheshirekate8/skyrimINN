@@ -12,6 +12,7 @@ import LocationsComponent from "./components/SplashLocations";
 import InnsComponent from "./components/SplashInns";
 import InnPageComponent from "./components/InnPage";
 import InnsFromRegionComponent from "./components/RegionPage";
+import InnsFromLocationComponent from "./components/LocationPage";
 
 
 
@@ -23,7 +24,6 @@ function App() {
   }, [dispatch]);
 
   const user = useSelector(state => state.session.user)
-  console.log(user)
 
   return (
     <div>
@@ -42,6 +42,9 @@ function App() {
             </Route>
             <Route path='/region/:id'>
               <InnsFromRegionComponent />
+            </Route>
+            <Route path='/locations/:id'>
+              <InnsFromLocationComponent />
             </Route>
           </Switch>
         </div>
