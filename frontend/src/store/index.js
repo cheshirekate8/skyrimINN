@@ -5,12 +5,14 @@ import sessionReducer from './session';
 import regionsReducer from "./regions";
 import locationsReducer from "./locations";
 import innsReducer from "./inns";
+import reservationsReducer from "./reservations";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   regions: regionsReducer,
   locations: locationsReducer,
   inns: innsReducer,
+  reservations: reservationsReducer,
 });
 
 let enhancer;

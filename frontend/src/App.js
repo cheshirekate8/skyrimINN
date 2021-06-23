@@ -49,7 +49,17 @@ function App() {
         </div>
       ) : (
         //IF HOST, MY HOST BOOKINGS
-        <Search isLoaded={isLoaded} />
+        <Switch>
+            <Route path='/inns/:id'>
+              <InnPageComponent isLoaded={isLoaded}/>
+            </Route>
+            <Route path='/region/:id'>
+              <InnsFromRegionComponent isLoaded={isLoaded}/>
+            </Route>
+            <Route path='/locations/:id'>
+              <InnsFromLocationComponent isLoaded={isLoaded}/>
+            </Route>
+        </Switch>
         //MY BOOKINGS
       )}
       <Footer />

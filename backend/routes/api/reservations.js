@@ -16,15 +16,9 @@ router.get(
 
 router.post(
   '/',
-  //validate reservation somehow,
-  // requireAuth,
-  // csrfProtection,
   asyncHandler(async(req,res) => {
     const {user_id, inn_id, start_date, end_date, price} = req.body;
     const reservation = await Reservation.create({user_id, inn_id, start_date, end_date, price});
-
-    // setTokenCookie(res, user)
-
     return res.json({
       reservation,
     })
