@@ -6,7 +6,7 @@ import * as sessionActions from "./store/session";
 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import Splash from "./components/Splash/index";
+import Search from "./components/Search/index";
 import RegionsComponent from "./components/SplashRegions";
 import LocationsComponent from "./components/SplashLocations";
 import InnsComponent from "./components/SplashInns";
@@ -32,23 +32,26 @@ function App() {
         <div>
           <Switch>
             <Route path='/' exact>
-              <Splash isLoaded={isLoaded} />
               <RegionsComponent isLoaded={isLoaded} />
               <LocationsComponent isLoaded={isLoaded}/>
               <InnsComponent isLoaded={isLoaded}/>
             </Route>
             <Route path='/inns/:id'>
-              <InnPageComponent />
+              <InnPageComponent isLoaded={isLoaded}/>
             </Route>
             <Route path='/region/:id'>
-              <InnsFromRegionComponent />
+              <InnsFromRegionComponent isLoaded={isLoaded}/>
             </Route>
             <Route path='/locations/:id'>
-              <InnsFromLocationComponent />
+              <InnsFromLocationComponent isLoaded={isLoaded}/>
             </Route>
           </Switch>
         </div>
-      ) : null}
+      ) : (
+        //IF HOST, MY HOST BOOKINGS
+        <Search isLoaded={isLoaded} />
+        //MY BOOKINGS
+      )}
       <Footer />
       <div className='footerHider'></div>
     </div>

@@ -26,5 +26,12 @@ router.get(
     }),
   )
 
+  router.get(
+    '/:id',
+    asyncHandler(async (req, res) => {
+      const location = await Location.findByPk(req.params.id);
+      return res.json(location)
+    }),
+  )
 
 module.exports = router;

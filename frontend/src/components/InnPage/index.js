@@ -4,7 +4,7 @@ import './InnPage.css'
 import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
 
-function InnPageComponent() {
+function InnPageComponent({isLoaded}) {
     const dispatch = useDispatch()
     const { id } = useParams();
 

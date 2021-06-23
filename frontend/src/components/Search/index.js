@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { usePhotoContext } from '../../context/PhotoContext';
 import './Splash.css'
 
-function Splash() {
+function Search() {
     const { photoUrl } = usePhotoContext()
 
     return (
@@ -18,4 +18,4 @@ function Splash() {
     )
 }
 
-export default Splash;
+export default Search;

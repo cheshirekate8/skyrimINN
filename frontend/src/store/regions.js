@@ -66,12 +66,12 @@ const regionsReducer = (state = initialState, action) => {
             };
         }
         case LOAD_REGION_INNS: {
-            const newState = Object.assign({}, initialState);
+            const newState = Object.assign({}, state);
             newState.innsList = action.innsList;
             return newState
         }
         case LOAD_ONE: {
-            const newState = Object.assign({}, initialState);
+            const newState = Object.assign({}, state);
             newState.currentRegion = action.region;
             return newState;
 

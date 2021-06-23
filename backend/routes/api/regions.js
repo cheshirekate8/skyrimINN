@@ -29,7 +29,7 @@ router.get(
 router.get(
     '/:id',
     asyncHandler(async (req, res) => {
-      const region = await Inn.findByPk(req.params.id);
+      const region = await Region.findByPk(req.params.id);
       return res.json(region)
     }),
   )
