@@ -14,6 +14,7 @@ function InnPageComponent({ isLoaded }) {
     }, [dispatch])
 
     const currentInn = useSelector(state => state.inns.currentInn);
+    const currentUser = useSelector(state => state.session.user)
 
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
@@ -23,14 +24,14 @@ function InnPageComponent({ isLoaded }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const user_id = id;
+        const user_id = parseInt(currentUser.id, 10);
         const inn_id = currentInn.id;
 
         const payload = {
             user_id,
             inn_id,
-            startDate,
-            endDate,
+            start_date: startDate,
+            end_date: endDate,
             price: 50
         }
 
@@ -49,13 +50,15 @@ function InnPageComponent({ isLoaded }) {
             <form
             onSubmit={handleSubmit}
             >
-                <h2 id='bookedTitle'>Book Now!</h2>
+            <h2 id='bookedTitle'>Book Now!</h2>
                 <label>
                     Start Date
                     <input
                     type="date"
                     value={startDate}
-                    onChange={(e) => {setStartDate(e.target.value)}} />
+                    onChange={(e) => {
+                        setStartDate(e.target.value);
+                        console.log('START DATE ========> ', e.target.value)}} />
                 </label>
                 <label>
                     End Date

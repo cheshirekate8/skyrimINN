@@ -1,4 +1,4 @@
-// import { csrfFetch } from './csrf';
+import { csrfFetch } from './csrf';
 
 const NEW_RESERVATION = 'reservation/new'
 
@@ -9,7 +9,7 @@ const addReservation = (payload) => ({
 
 export const newReservation = payload => async dispatch => {
     console.log(payload);
-    const response = await fetch(`/api/reservations`, {
+    const response = await csrfFetch(`/api/reservations`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
