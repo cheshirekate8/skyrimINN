@@ -14,6 +14,26 @@ router.get(
     }),
   )
 
+router.get(
+    '/user/:id',
+    asyncHandler(async (req, res) => {
+      const reservations = await Reservation.findAll({
+        where: {
+          user_id: req.params.id
+        }
+      });
+      return res.json(reservations)
+    }),
+  )
+
+router.get(
+    '/:id',
+    asyncHandler(async (req, res) => {
+      const reservations = await Reservation.findByPk(req.params.id);
+      return res.json(reservations)
+    }),
+  )
+
 router.post(
   '/',
   asyncHandler(async(req,res) => {

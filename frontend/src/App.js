@@ -13,6 +13,7 @@ import InnsComponent from "./components/SplashInns";
 import InnPageComponent from "./components/InnPage";
 import InnsFromRegionComponent from "./components/RegionPage";
 import InnsFromLocationComponent from "./components/LocationPage";
+import MyReservationsComponent from "./components/MyReservations";
 
 
 
@@ -50,6 +51,10 @@ function App() {
       ) : (
         //IF HOST, MY HOST BOOKINGS
         <Switch>
+            <Route path='/' exact>
+              <MyReservationsComponent />
+              <Search />
+            </Route>
             <Route path='/inns/:id'>
               <InnPageComponent isLoaded={isLoaded}/>
             </Route>
