@@ -14,6 +14,7 @@ import InnPageComponent from "./components/InnPage";
 import InnsFromRegionComponent from "./components/RegionPage";
 import InnsFromLocationComponent from "./components/LocationPage";
 import MyReservationsComponent from "./components/MyReservations";
+import EditUserForm from "./components/EditUserForm";
 
 import { getReservationsFromUserId } from "./store/reservations";
 
@@ -63,6 +64,9 @@ function App() {
             <MyReservationsComponent isLoaded={isLoaded} />
             <InnsComponent isLoaded={isLoaded} />
             <Search isLoaded={isLoaded} />
+          </Route>
+          <Route path='/user/edit/:id'>
+            <EditUserForm />
           </Route>
           <Route path='/inns/:id'>
             <InnPageComponent isLoaded={isLoaded} />

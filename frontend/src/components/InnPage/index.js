@@ -18,7 +18,7 @@ function InnPageComponent() {
     }, [dispatch, id])
 
     const currentInn = useSelector(state => state.inns.currentInn);
-    const currentUser = useSelector(state => state.session.user)
+    const currentUser = useSelector(state => state.session.user);
 
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
