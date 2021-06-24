@@ -26,6 +26,7 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
       .then(() => setIsLoaded(true));
@@ -66,9 +67,8 @@ function App() {
           </Switch>
         </div>
       ) : (
-        //IF HOST, MY HOST BOOKINGS
         <Switch>
-          <Route path='/' exact>
+          <Route path='/home' exact>
             <MyReservationsComponent isLoaded={isLoaded} />
             <InnsComponent isLoaded={isLoaded} />
           </Route>
@@ -93,5 +93,6 @@ function App() {
 }
 
 //CHANGE NULL TO LOGGED IN USER PAGE
+
 
 export default App;

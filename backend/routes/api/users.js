@@ -78,7 +78,7 @@ router.delete(
       if (user) {
           await user.destroy()
           // res.status(204).end();
-          res.json(user);
+          return res.json(user);
       } else {
           const userNotFoundError = (userId) => {
               const error = new Error("User Not Found");
