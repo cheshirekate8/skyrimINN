@@ -77,10 +77,11 @@ router.delete(
     const user = await User.findByPk(userId);
       if (user) {
           await user.destroy()
-          res.status(204).end();
+          // res.status(204).end();
+          res.json(user);
       } else {
           const userNotFoundError = (userId) => {
-              const error = new Error("Tweet Not Found");
+              const error = new Error("User Not Found");
               error.status = 404;
               return error
           }

@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './EditUser.css'
+import { deleteUser } from "../../store/session";
+import { useHistory } from "react-router";
 
 function EditUserForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState(sessionUser?.email);
     const [username, setUsername] = useState(sessionUser?.username);
@@ -15,6 +18,8 @@ function EditUserForm() {
 
     const id = sessionUser?.id
 
+    useEffect(() => {
+    }, [dispatch, sessionUser])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,11 +32,15 @@ function EditUserForm() {
         }
 
         dispatch(sessionActions.updateUser(user))
-
-        const header = document.getElementById('edit-user-header')
-        header.innherHTML = 'Done!'
+        history.push('/')
 
     };
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+
+        dispatch(deleteUser(id))
+    }
 
     return (
         <div className='edit-user-div'>
@@ -68,16 +77,10 @@ function EditUserForm() {
                         required
                     />
                 </label>
-                <label>
-                    Confirm Password
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </label>
                 <button type="submit">Confirm Edit User</button>
+            </form>
+            <form onSubmit={handleDelete}>
+                <button type="submit" id='deleteUserButton' >Delete User</button>
             </form>
         </div>
     );

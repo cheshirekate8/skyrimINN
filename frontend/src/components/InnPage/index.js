@@ -23,6 +23,7 @@ function InnPageComponent() {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
 
+    const bookedTitle = document.getElementById('bookedTitle')
 
     //user_id, inn_id, start_date, end_date, price
     const HandleSubmit = async (e) => {
@@ -31,45 +32,52 @@ function InnPageComponent() {
         const user_id = parseInt(currentUser.id, 10);
         const inn_id = currentInn.id;
 
-        const payload = {
-            user_id,
-            inn_id,
-            start_date: startDate,
-            end_date: endDate,
-            price: 50
+            const payload = {
+                user_id,
+                inn_id,
+                start_date: startDate,
+                end_date: endDate,
+                price: 50
+            }
+
+            dispatch(newReservation(payload))
+
+            bookedTitle.innerHTML = 'Booked!!!'
+
+            setTimeout(() => {
+                history.push('/')
+            }, 2000)
         }
-
-        dispatch(newReservation(payload))
-
-        history.push('/')
-
-    }
 
     return (
         <div className='innDiv'>
             <h1 className='innTitle'>{currentInn?.name}</h1>
             <form
-            className='bookingForm'
-            onSubmit={HandleSubmit}
+                className='bookingForm'
+                onSubmit={HandleSubmit}
             >
-            <h2 id='bookedTitle'>Book Now!</h2>
+                <h2 id='bookedTitle'>Book Now!</h2>
                 <label className='bookingLabel'>
                     Start Date
                     <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => {
-                        setStartDate(e.target.value);
-                        console.log('START DATE ========> ', e.target.value)}} />
+                        type="date"
+                        value={startDate}
+                        onChange={(e) => {setStartDate(e.target.value);}} />
                 </label>
                 <label className='bookingLabel'>
                     End Date
                     <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => {setEndDate(e.target.value)}} />
+                        type="date"
+                        value={endDate}
+                        onChange={(e) => { setEndDate(e.target.value) }} />
                 </label>
-                <button>Confirm Booking</button>
+                <div id='booking-button-div'>
+                    {currentUser ? (
+                        <button id='booking-button'>Confirm Booking</button>
+                    ):(
+                        <p>Please Signup or Login to book with {currentInn?.name}</p>
+                    )}
+                </div>
             </form>
         </div>
     )
