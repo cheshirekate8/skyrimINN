@@ -5,9 +5,13 @@ import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
 import { newReservation } from '../../store/reservations';
 
+import { Redirect } from 'react-router';
+import { useHistory } from 'react-router';
+
 function InnPageComponent() {
     const dispatch = useDispatch()
     const { id } = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getOneInn(id))
@@ -21,7 +25,7 @@ function InnPageComponent() {
 
 
     //user_id, inn_id, start_date, end_date, price
-    const handleSubmit = async (e) => {
+    const HandleSubmit = async (e) => {
         e.preventDefault();
 
         const user_id = parseInt(currentUser.id, 10);
@@ -35,12 +39,9 @@ function InnPageComponent() {
             price: 50
         }
 
-        const reservation = dispatch(newReservation(payload))
+        dispatch(newReservation(payload))
 
-        if (reservation) {
-            const title = document.getElementById('bookedTitle');
-            title.innerHTML = 'Booked!!'
-        }
+        history.push('/')
 
     }
 
@@ -49,7 +50,7 @@ function InnPageComponent() {
             <h1 className='innTitle'>{currentInn?.name}</h1>
             <form
             className='bookingForm'
-            onSubmit={handleSubmit}
+            onSubmit={HandleSubmit}
             >
             <h2 id='bookedTitle'>Book Now!</h2>
                 <label className='bookingLabel'>

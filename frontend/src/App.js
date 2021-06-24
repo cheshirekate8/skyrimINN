@@ -25,14 +25,14 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
-    .then(() => setIsLoaded(true));
+      .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   const user = useSelector(state => state.session.user)
 
   useEffect(() => {
     dispatch(getReservationsFromUserId(user?.id));
-}, [dispatch, user])
+  }, [dispatch, user])
 
   return (
     <div>
@@ -42,40 +42,41 @@ function App() {
           <Switch>
             <Route path='/' exact>
               <RegionsComponent isLoaded={isLoaded} />
-              <LocationsComponent isLoaded={isLoaded}/>
-              <InnsComponent isLoaded={isLoaded}/>
+              <LocationsComponent isLoaded={isLoaded} />
+              <InnsComponent isLoaded={isLoaded} />
             </Route>
             <Route path='/inns/:id'>
-              <InnPageComponent isLoaded={isLoaded}/>
+              <InnPageComponent isLoaded={isLoaded} />
             </Route>
             <Route path='/region/:id'>
-              <InnsFromRegionComponent isLoaded={isLoaded}/>
+              <InnsFromRegionComponent isLoaded={isLoaded} />
             </Route>
             <Route path='/locations/:id'>
-              <InnsFromLocationComponent isLoaded={isLoaded}/>
+              <InnsFromLocationComponent isLoaded={isLoaded} />
             </Route>
           </Switch>
         </div>
       ) : (
         //IF HOST, MY HOST BOOKINGS
         <Switch>
-            <Route path='/' exact>
-              <MyReservationsComponent isLoaded={isLoaded}/>
-              <Search isLoaded={isLoaded}/>
-            </Route>
-            <Route path='/inns/:id'>
-              <InnPageComponent isLoaded={isLoaded}/>
-            </Route>
-            <Route path='/region/:id'>
-              <InnsFromRegionComponent isLoaded={isLoaded}/>
-            </Route>
-            <Route path='/locations/:id'>
-              <InnsFromLocationComponent isLoaded={isLoaded}/>
-            </Route>
+          <Route path='/' exact>
+            <MyReservationsComponent isLoaded={isLoaded} />
+            <InnsComponent isLoaded={isLoaded} />
+            <Search isLoaded={isLoaded} />
+          </Route>
+          <Route path='/inns/:id'>
+            <InnPageComponent isLoaded={isLoaded} />
+          </Route>
+          <Route path='/region/:id'>
+            <InnsFromRegionComponent isLoaded={isLoaded} />
+          </Route>
+          <Route path='/locations/:id'>
+            <InnsFromLocationComponent isLoaded={isLoaded} />
+          </Route>
         </Switch>
         //MY BOOKINGS
       )}
-      <Footer isLoaded={isLoaded}/>
+      <Footer isLoaded={isLoaded} />
       <div className='footerHider'></div>
     </div>
   );
