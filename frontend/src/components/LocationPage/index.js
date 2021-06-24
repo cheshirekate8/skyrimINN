@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Route, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getInnsFromLocation, getOneLocation } from '../../store/locations';
 import './LocationPage.css'
 
@@ -10,11 +10,11 @@ function InnsFromLocationComponent() {
 
     useEffect(() => {
         dispatch(getInnsFromLocation(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     useEffect(() => {
         dispatch(getOneLocation(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     const innsList = useSelector(state => state.locations.innsList)
     const currentLocation = useSelector(state => state.locations.currentLocation)

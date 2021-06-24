@@ -15,16 +15,24 @@ import InnsFromRegionComponent from "./components/RegionPage";
 import InnsFromLocationComponent from "./components/LocationPage";
 import MyReservationsComponent from "./components/MyReservations";
 
+import { getReservationsFromUserId } from "./store/reservations";
+
+
 
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser())
+    .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   const user = useSelector(state => state.session.user)
+
+  useEffect(() => {
+    dispatch(getReservationsFromUserId(user?.id));
+}, [dispatch, user])
 
   return (
     <div>
@@ -52,8 +60,8 @@ function App() {
         //IF HOST, MY HOST BOOKINGS
         <Switch>
             <Route path='/' exact>
-              <MyReservationsComponent />
-              <Search />
+              <MyReservationsComponent isLoaded={isLoaded}/>
+              <Search isLoaded={isLoaded}/>
             </Route>
             <Route path='/inns/:id'>
               <InnPageComponent isLoaded={isLoaded}/>
@@ -67,7 +75,7 @@ function App() {
         </Switch>
         //MY BOOKINGS
       )}
-      <Footer />
+      <Footer isLoaded={isLoaded}/>
       <div className='footerHider'></div>
     </div>
   );

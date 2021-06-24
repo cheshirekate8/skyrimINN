@@ -5,13 +5,13 @@ import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
 import { newReservation } from '../../store/reservations';
 
-function InnPageComponent({ isLoaded }) {
+function InnPageComponent() {
     const dispatch = useDispatch()
     const { id } = useParams();
 
     useEffect(() => {
         dispatch(getOneInn(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     const currentInn = useSelector(state => state.inns.currentInn);
     const currentUser = useSelector(state => state.session.user)
@@ -46,12 +46,13 @@ function InnPageComponent({ isLoaded }) {
 
     return (
         <div className='innDiv'>
-            <h1>{currentInn?.name}</h1>
+            <h1 className='innTitle'>{currentInn?.name}</h1>
             <form
+            className='bookingForm'
             onSubmit={handleSubmit}
             >
             <h2 id='bookedTitle'>Book Now!</h2>
-                <label>
+                <label className='bookingLabel'>
                     Start Date
                     <input
                     type="date"
@@ -60,7 +61,7 @@ function InnPageComponent({ isLoaded }) {
                         setStartDate(e.target.value);
                         console.log('START DATE ========> ', e.target.value)}} />
                 </label>
-                <label>
+                <label className='bookingLabel'>
                     End Date
                     <input
                     type="date"
