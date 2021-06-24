@@ -35,25 +35,37 @@ function App() {
   const user = useSelector(state => state.session.user)
 
   useEffect(() => {
-    if (!user) {
-      history.push('/')
-    }
-  }, [history, user])
-
-  useEffect(() => {
     dispatch(getReservationsFromUserId(user?.id));
   }, [dispatch, user])
 
   return (
     <div>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && !user ? (
+      {isLoaded && (
         <div>
           <Switch>
             <Route path='/' exact>
+              {user ? <Redirect to="/home" /> : null}
               <RegionsComponent isLoaded={isLoaded} />
               <LocationsComponent isLoaded={isLoaded} />
               <InnsComponent isLoaded={isLoaded} />
+            </Route>
+            <Route path='/home' exact>
+              {!user ? <Redirect to="/" /> : null}
+              <MyReservationsComponent isLoaded={isLoaded} />
+              <InnsComponent isLoaded={isLoaded} />
+            </Route>
+            <Route path='/inns/:id'>
+              <InnPageComponent isLoaded={isLoaded} />
+            </Route>
+            <Route path='/region/:id'>
+              <InnsFromRegionComponent isLoaded={isLoaded} />
+            </Route>
+            <Route path='/locations/:id'>
+              <InnsFromLocationComponent isLoaded={isLoaded} />
+            </Route>
+            <Route path='/user/edit/:id'>
+              <EditUserForm />
             </Route>
             <Route path='/inns/:id'>
               <InnPageComponent isLoaded={isLoaded} />
@@ -66,25 +78,6 @@ function App() {
             </Route>
           </Switch>
         </div>
-      ) : (
-        <Switch>
-          <Route path='/home' exact>
-            <MyReservationsComponent isLoaded={isLoaded} />
-            <InnsComponent isLoaded={isLoaded} />
-          </Route>
-          <Route path='/user/edit/:id'>
-            <EditUserForm />
-          </Route>
-          <Route path='/inns/:id'>
-            <InnPageComponent isLoaded={isLoaded} />
-          </Route>
-          <Route path='/region/:id'>
-            <InnsFromRegionComponent isLoaded={isLoaded} />
-          </Route>
-          <Route path='/locations/:id'>
-            <InnsFromLocationComponent isLoaded={isLoaded} />
-          </Route>
-        </Switch>
       )}
       <Footer isLoaded={isLoaded} />
       <div className='footerHider'></div>
