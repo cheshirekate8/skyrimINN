@@ -7,7 +7,6 @@ import { useHistory } from "react-router";
 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import Search from "./components/Search/index";
 import RegionsComponent from "./components/SplashRegions";
 import LocationsComponent from "./components/SplashLocations";
 import InnsComponent from "./components/SplashInns";
@@ -16,15 +15,12 @@ import InnsFromRegionComponent from "./components/RegionPage";
 import InnsFromLocationComponent from "./components/LocationPage";
 import MyReservationsComponent from "./components/MyReservations";
 import EditUserForm from "./components/EditUserForm";
+import EditReservationForm from "./components/EditReservationForm";
 
 import { getReservationsFromUserId } from "./store/reservations";
 
-
-
-
 function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -58,23 +54,19 @@ function App() {
             <Route path='/inns/:id'>
               <InnPageComponent isLoaded={isLoaded} />
             </Route>
-            <Route path='/region/:id'>
+            <Route path='/regions/:id'>
               <InnsFromRegionComponent isLoaded={isLoaded} />
             </Route>
             <Route path='/locations/:id'>
               <InnsFromLocationComponent isLoaded={isLoaded} />
             </Route>
             <Route path='/user/edit/:id'>
+              {!user ? <Redirect to="/" /> : null}
               <EditUserForm />
             </Route>
-            <Route path='/inns/:id'>
-              <InnPageComponent isLoaded={isLoaded} />
-            </Route>
-            <Route path='/region/:id'>
-              <InnsFromRegionComponent isLoaded={isLoaded} />
-            </Route>
-            <Route path='/locations/:id'>
-              <InnsFromLocationComponent isLoaded={isLoaded} />
+            <Route path='/reservation/edit/:id'>
+              {!user ? <Redirect to="/" /> : null}
+              <EditReservationForm />
             </Route>
           </Switch>
         </div>

@@ -21,7 +21,7 @@ const RegionsComponent = () => {
             </div>
             <div className='regions-right-div'>
                 <h1>Rediscover the Regions of Skyrim...</h1>
-                {regions.map((region) => (<Link to={`region/${region.id}`} key={region.id}>{region.name}</Link>))}
+                {regions.map((region) => (<Link to={`regions/${region.id}`} key={region.id}>{region.name}</Link>))}
             </div>
         </div>
     )

@@ -48,6 +48,7 @@ router.post(
 router.put(
     '/:id(\\d+)',
     validateSignup,
+    requireAuth,
     asyncHandler(async (req, res, next) => {
       const userId = parseInt(req.params.id, 10);
       const user = await User.findByPk(userId);

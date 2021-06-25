@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getInns, getOneInn } from '../../store/inns';
+import { getInns } from '../../store/inns';
 import './MyReservations.css'
 
 function MyReservationsComponent({ isLoaded }) {

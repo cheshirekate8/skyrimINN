@@ -13,13 +13,12 @@ function EditUserForm() {
     const [email, setEmail] = useState(sessionUser?.email);
     const [username, setUsername] = useState(sessionUser?.username);
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
     const id = sessionUser?.id
 
-    useEffect(() => {
-    }, [dispatch, sessionUser])
+    // useEffect(() => {
+    // }, [dispatch, sessionUser])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,7 +32,6 @@ function EditUserForm() {
 
         dispatch(sessionActions.updateUser(user))
         history.push('/')
-
     };
 
     const handleDelete = (e) => {

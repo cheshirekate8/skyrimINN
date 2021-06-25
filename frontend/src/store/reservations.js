@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const NEW_RESERVATION = 'reservation/new'
 const GET_RESERVATIONS = 'reservations/get'
+const LOAD_ONE = 'reservations/get/one'
 
 const addReservation = (payload) => ({
     type: NEW_RESERVATION,
@@ -11,6 +12,11 @@ const addReservation = (payload) => ({
 const getReservations = (payload) => ({
     type: GET_RESERVATIONS,
     payload
+})
+
+const loadOne = (reservation) => ({
+    type: LOAD_ONE,
+    reservation
 })
 
 export const newReservation = payload => async dispatch => {
@@ -40,6 +46,19 @@ export const getReservationsFromUserId = id => async dispatch => {
     }
 };
 
+export const getOneReservation = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/reservations/${id}`);
+
+    if (response.ok) {
+        const reservation = await response.json();
+        dispatch(loadOne(reservation));
+      }
+}
+
+export const updateReservation = (reservation) => {
+
+}
+
 const initialState = {
     list: []
 }
@@ -59,6 +78,12 @@ const reservationsReducer = (state = initialState, action) => {
                 list: action.payload
             }
             return newState
+        }
+        case LOAD_ONE: {
+            const newState = Object.assign({}, initialState);
+            newState.currentReservation = action.reservation;
+            return newState;
+
         }
         default:
             return state;
