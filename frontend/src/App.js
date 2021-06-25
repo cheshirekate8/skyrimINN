@@ -18,6 +18,7 @@ import EditUserForm from "./components/EditUserForm";
 import EditReservationForm from "./components/EditReservationForm";
 
 import { getReservationsFromUserId } from "./store/reservations";
+import { getRecentInns } from "./store/inns";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
   useEffect(() => {
     dispatch(getReservationsFromUserId(user?.id));
   }, [dispatch, user])
+
 
   return (
     <div>

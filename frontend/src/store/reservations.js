@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const NEW_RESERVATION = 'reservation/new'
 const GET_RESERVATIONS = 'reservations/get'
 const LOAD_ONE = 'reservations/get/one'
+const CANCEL = 'reservations/cancel'
 
 const addReservation = (payload) => ({
     type: NEW_RESERVATION,
@@ -18,6 +19,19 @@ const loadOne = (reservation) => ({
     type: LOAD_ONE,
     reservation
 })
+
+const cancel = (reservation) => ({
+    type: CANCEL
+})
+
+export const cancelReservation = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reservations/${id}`, {
+        method: 'DELETE'
+    })
+    const data = await response.json();
+    dispatch(cancel(data.reservation));
+    return 'DELETED'
+}
 
 export const newReservation = payload => async dispatch => {
     const response = await csrfFetch(`/api/reservations`, {
@@ -55,9 +69,9 @@ export const getOneReservation = (id) => async dispatch => {
       }
 }
 
-export const updateReservation = (reservation) => {
+// export const updateReservation = (reservation) => {
 
-}
+// }
 
 const initialState = {
     list: []

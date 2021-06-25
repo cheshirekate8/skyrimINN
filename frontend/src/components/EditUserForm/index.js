@@ -31,7 +31,16 @@ function EditUserForm() {
         }
 
         dispatch(sessionActions.updateUser(user))
-        history.push('/')
+        .catch(
+            async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+                }
+            );
+
+        // if (errors.length === 0) {
+        //     history.push('/')
+        // }
     };
 
     const handleDelete = (e) => {
@@ -44,8 +53,8 @@ function EditUserForm() {
         <div className='edit-user-div'>
             <h2 id='edit-user-header'>Edit User</h2>
             <form onSubmit={handleSubmit}>
-                <ul
-                    hidden={!!errors}>
+                <ul>
+                    {/* hidden={!!errors}> */}
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
                 <label>

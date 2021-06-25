@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInns } from '../../store/inns';
+import { cancelReservation } from '../../store/reservations';
 import './MyReservations.css'
 
 function MyReservationsComponent({ isLoaded }) {
@@ -13,17 +14,31 @@ function MyReservationsComponent({ isLoaded }) {
     const inns = useSelector(state => state.inns)
     const reservations = useSelector(state => state.reservations.list)
 
-        return (
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e.target.value)
+        // dispatch(cancelReservation(id))
+    }
+
+        return isLoaded && (
             <div className='reservations-div'>
                 <h2>My Reservations</h2>
-                {reservations?.map((reservation, i) => (
-                    <div className='single-reservation'>
-                        <h3 className='reservation-headers'>Reservation #{i + 1}</h3>
-                        <li>Inn: {inns[reservation?.inn_id]?.name}</li>
-                        <li>Start of Stay: {reservation?.start_date}</li>
-                        <li>End of Stay: {reservation?.end_date}</li>
-                    </div>
-                ))}
+                {reservations.length > 0 ? (
+                    reservations?.map((reservation, i) => (
+                        <form
+                        className='single-reservation'
+                        onSubmit={handleSubmit}
+                        value={reservation.id}>
+                            <h3 className='reservation-headers'>Reservation #{i + 1}</h3>
+                            <li>Inn: {inns[reservation?.inn_id]?.name}</li>
+                            <li>Start of Stay: {reservation?.start_date}</li>
+                            <li>End of Stay: {reservation?.end_date}</li>
+                            <button type="submit">Cancel Reservation</button>
+                        </form>
+                    ))
+                ) : (
+                    <p>You have no reservations!</p>
+                )}
             </div>
         )
 }

@@ -23,16 +23,16 @@ function SignupForm() {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors([...errors, 'Confirm Password field must be the same as the Password field']);
   };
 
   console.log(errors)
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul
-      hidden={!!errors}>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      <ul>
+      {/* hidden={!!errors}> */}
+        {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label className='modal-label'>
         Email

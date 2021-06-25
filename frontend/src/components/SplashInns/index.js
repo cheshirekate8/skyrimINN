@@ -11,7 +11,7 @@ const InnsComponent = () => {
         dispatch(getRecentInns())
     }, [dispatch])
 
-    const recentInns = useSelector(state => state.inns.list)
+    const recentInns = useSelector(state => state.inns.recentList)
 
     return (
         <div className='innsOuterDiv'>
