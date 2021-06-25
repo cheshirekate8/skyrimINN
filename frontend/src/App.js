@@ -35,7 +35,6 @@ function App() {
     dispatch(getReservationsFromUserId(user?.id));
   }, [dispatch, user])
 
-
   return (
     <div>
       <Navigation isLoaded={isLoaded} />
@@ -67,7 +66,6 @@ function App() {
               <EditUserForm />
             </Route>
             <Route path='/reservation/edit/:id'>
-              {!user ? <Redirect to="/" /> : null}
               <EditReservationForm />
             </Route>
           </Switch>

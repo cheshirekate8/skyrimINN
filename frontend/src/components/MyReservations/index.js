@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInns } from '../../store/inns';
-import { cancelReservation } from '../../store/reservations';
-import './MyReservations.css'
+import './MyReservations.css';
+import { Link } from 'react-router-dom';
 
 function MyReservationsComponent({ isLoaded }) {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function MyReservationsComponent({ isLoaded }) {
                             <li>Inn: {inns[reservation?.inn_id]?.name}</li>
                             <li>Start of Stay: {reservation?.start_date}</li>
                             <li>End of Stay: {reservation?.end_date}</li>
-                            <button type="submit">Cancel Reservation</button>
+                            <Link to={`/reservation/edit/${reservation.id}`} type="submit">Edit Reservation</Link>
                         </form>
                     ))
                 ) : (

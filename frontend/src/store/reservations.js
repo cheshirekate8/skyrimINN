@@ -15,9 +15,9 @@ const getReservations = (payload) => ({
     payload
 })
 
-const loadOne = (reservation) => ({
+const loadOne = (payload) => ({
     type: LOAD_ONE,
-    reservation
+    payload
 })
 
 const cancel = (reservation) => ({
@@ -74,7 +74,8 @@ export const getOneReservation = (id) => async dispatch => {
 // }
 
 const initialState = {
-    list: []
+    list: [],
+    currentReservation: null
 }
 
 const reservationsReducer = (state = initialState, action) => {
@@ -94,8 +95,10 @@ const reservationsReducer = (state = initialState, action) => {
             return newState
         }
         case LOAD_ONE: {
-            const newState = Object.assign({}, initialState);
-            newState.currentReservation = action.reservation;
+            const newState = {
+                ...state,
+                currentReservation: action.payload
+            }
             return newState;
 
         }
