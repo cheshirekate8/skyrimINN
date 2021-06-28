@@ -27,27 +27,67 @@ function EditReservationForm() {
 
     const currentInn = useSelector(state => state.inns.currentInn);
 
-    // const [startDate, setStartDate] = useState(currentReservation?.start_date)
-    // const [endDate, setEndDate] = useState(currentReservation?.end_date)
+    const [startDate, setStartDate] = useState(currentReservation?.start_date)
+    const [endDate, setEndDate] = useState(currentReservation?.end_date)
 
-    const reservationDiv = document.getElementById('reservationDiv')
+    const reservationTitle = document.getElementById('reservationTitle')
 
     const handleDelete = async (e) => {
         e.preventDefault();
 
         dispatch(cancelReservation(currentReservation?.id))
 
-        reservationDiv.innerHTML = 'Canceled!!'
+        reservationTitle.innerHTML = 'Canceled!!'
 
         setTimeout(() => {
             history.push('/')
         }, 2000)
+    }
 
+    const HandleSubmit = async (e) => {
+        e.preventDefault();
+
+        const payload = {
+            start_date: startDate,
+            end_date: endDate,
+        }
+
+        dispatch(newReservation(payload))
+
+        // bookedTitle.innerHTML = 'Booked!!!'
+
+        setTimeout(() => {
+            history.push('/')
+        }, 2000)
     }
 
     return (
         <div id='reservationDiv'>
-            <h1>Your Reservation for {currentInn?.name}</h1>
+            <h1 id='reservationTitle'>Edit your reservation for {currentInn?.name}</h1>
+            <form
+                className='editBookingForm'
+                onSubmit={HandleSubmit}
+            >
+                <label>Current Check in is {currentReservation.start_date}</label>
+                <label className='editBookingLabel'>
+                    Start Date
+                    <input
+                        type="date"
+                        value={startDate}
+                        onChange={(e) => { setStartDate(e.target.value); }} />
+                </label>
+                        <label>Current Check out is {currentReservation.end_date}</label>
+                <label className='editBookingLabel'>
+                    End Date
+                    <input
+                        type="date"
+                        value={endDate}
+                        onChange={(e) => { setEndDate(e.target.value) }} />
+                </label>
+                <div id='edit-booking-button-div'>
+                    <button id='edit-booking-button'>Confirm Edit Reservation</button>
+                </div>
+            </form>
             <form onSubmit={handleDelete}>
                 <button type="submit">Delete Reservation</button>
             </form>
