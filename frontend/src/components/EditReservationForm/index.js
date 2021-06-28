@@ -13,18 +13,18 @@ function EditReservationForm() {
     const { id } = useParams();
     const history = useHistory();
 
+    const currentUser = useSelector(state => state.session.user);
+
     useEffect(() => {
         dispatch(getOneReservation(id))
     }, [dispatch, id]);
 
+    const currentReservation = useSelector(state => state.reservations.currentReservation);
+
     useEffect(() => {
-        dispatch(getOneInn(id))
+        dispatch(getOneInn(currentReservation.inn_id))
     }, [dispatch, id])
 
-    
-
-    const currentReservation = useSelector(state => state.reservations.currentReservation);
-    const currentUser = useSelector(state => state.session.user);
     const currentInn = useSelector(state => state.inns.currentInn);
 
     // const [startDate, setStartDate] = useState(currentReservation?.start_date)
@@ -46,8 +46,8 @@ function EditReservationForm() {
     }
 
     return (
-        <div>
-            <h1 id='reservationDiv'>Your Reservation for {currentInn?.name}</h1>
+        <div id='reservationDiv'>
+            <h1>Your Reservation for {currentInn?.name}</h1>
             <form onSubmit={handleDelete}>
                 <button type="submit">Delete Reservation</button>
             </form>
