@@ -25,6 +25,12 @@ function InnPageComponent() {
 
     const bookedTitle = document.getElementById('bookedTitle')
 
+    let today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const year = today.getFullYear();
+    today = year + '-' + month + '-' + day;
+
     //user_id, inn_id, start_date, end_date, price
     const HandleSubmit = async (e) => {
         e.preventDefault();
@@ -62,6 +68,7 @@ function InnPageComponent() {
                     <input
                         type="date"
                         value={startDate}
+                        min={today}
                         onChange={(e) => {setStartDate(e.target.value);}} />
                 </label>
                 <label className='bookingLabel'>
@@ -69,6 +76,7 @@ function InnPageComponent() {
                     <input
                         type="date"
                         value={endDate}
+                        min={today}
                         onChange={(e) => { setEndDate(e.target.value) }} />
                 </label>
                 <div id='booking-button-div'>

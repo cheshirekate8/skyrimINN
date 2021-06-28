@@ -31,6 +31,12 @@ function EditReservationForm() {
 
     const reservationTitle = document.getElementById('reservationTitle')
 
+    let today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const year = today.getFullYear();
+    today = year + '-' + month + '-' + day;
+
     const handleDelete = async (e) => {
         e.preventDefault();
 
@@ -66,6 +72,7 @@ function EditReservationForm() {
                     <input
                         type="date"
                         value={startDate}
+                        min={today}
                         onChange={(e) => { setStartDate(e.target.value); }} />
                 </label>
                         <label>Current Check out is {currentReservation?.end_date}</label>
@@ -74,6 +81,7 @@ function EditReservationForm() {
                     <input
                         type="date"
                         value={endDate}
+                        min={today}
                         onChange={(e) => { setEndDate(e.target.value) }} />
                 </label>
                 <div id='edit-booking-button-div'>
