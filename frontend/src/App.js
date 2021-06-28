@@ -31,9 +31,6 @@ function App() {
 
   const user = useSelector(state => state.session.user)
 
-  useEffect(() => {
-    dispatch(getReservationsFromUserId(user?.id));
-  }, [dispatch, user])
 
   return (
     <div>

@@ -21,6 +21,8 @@ function EditReservationForm() {
         dispatch(getOneInn(id))
     }, [dispatch, id])
 
+    
+
     const currentReservation = useSelector(state => state.reservations.currentReservation);
     const currentUser = useSelector(state => state.session.user);
     const currentInn = useSelector(state => state.inns.currentInn);

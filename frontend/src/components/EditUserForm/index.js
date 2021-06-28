@@ -38,9 +38,9 @@ function EditUserForm() {
                 }
             );
 
-        // if (errors.length === 0) {
-        //     history.push('/')
-        // }
+        if (errors.length === 0) {
+            history.push('/')
+        }
     };
 
     const handleDelete = (e) => {
