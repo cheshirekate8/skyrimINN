@@ -24,7 +24,9 @@ function InnsFromRegionComponent() {
         return (
             <div className='region-div'>
                 <h1>The Inns Of {currentRegion?.name}</h1>
-                {innsList.map(inn => <Link to={`/inns/${inn?.id}`}>{inn?.name}</Link>)}
+                <ul>
+                    {innsList.map(inn => <li><Link to={`/inns/${inn?.id}`}>{inn?.name}</Link></li>)}
+                </ul>
             </div>
         )
     } else {

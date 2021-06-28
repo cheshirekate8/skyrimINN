@@ -4,6 +4,12 @@ const NEW_RESERVATION = 'reservation/new'
 const GET_RESERVATIONS = 'reservations/get'
 const LOAD_ONE = 'reservations/get/one'
 const CANCEL = 'reservations/cancel'
+const EDIT ='reservations/edit'
+
+const editReservation = (payload) => ({
+    type: EDIT,
+    payload
+})
 
 const addReservation = (payload) => ({
     type: NEW_RESERVATION,
@@ -69,9 +75,20 @@ export const getOneReservation = (id) => async dispatch => {
       }
 }
 
-// export const updateReservation = (reservation) => {
+export const updateReservation = (reservation) => async dispatch => {
+    const response = await csrfFetch(`/api/reservations/${reservation.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reservation),
+    });
+    if (response.ok) {
+        const reservation = await response.json();
+        dispatch(editReservation(reservation));
+      }
 
-// }
+}
 
 const initialState = {
     list: [],

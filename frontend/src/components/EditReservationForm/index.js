@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getOneReservation, newReservation } from '../../store/reservations';
 import { getOneInn } from '../../store/inns';
-import { cancelReservation } from '../../store/reservations';
+import { cancelReservation, updateReservation } from '../../store/reservations';
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router';
 
@@ -20,10 +20,9 @@ function EditReservationForm() {
     }, [dispatch, id]);
 
     const currentReservation = useSelector(state => state.reservations.currentReservation);
-
     useEffect(() => {
-        dispatch(getOneInn(currentReservation.inn_id))
-    }, [dispatch, id])
+        dispatch(getOneInn(currentReservation?.inn_id))
+    }, [dispatch, currentReservation])
 
     const currentInn = useSelector(state => state.inns.currentInn);
 
@@ -47,18 +46,11 @@ function EditReservationForm() {
     const HandleSubmit = async (e) => {
         e.preventDefault();
 
-        const payload = {
-            start_date: startDate,
-            end_date: endDate,
-        }
+        dispatch(updateReservation(currentReservation));
 
-        dispatch(newReservation(payload))
-
-        // bookedTitle.innerHTML = 'Booked!!!'
-
-        setTimeout(() => {
-            history.push('/')
-        }, 2000)
+        // setTimeout(() => {
+        //     history.push('/')
+        // }, 2000)
     }
 
     return (
@@ -68,7 +60,7 @@ function EditReservationForm() {
                 className='editBookingForm'
                 onSubmit={HandleSubmit}
             >
-                <label>Current Check in is {currentReservation.start_date}</label>
+                <label>Current Check in is {currentReservation?.start_date}</label>
                 <label className='editBookingLabel'>
                     Start Date
                     <input
@@ -76,7 +68,7 @@ function EditReservationForm() {
                         value={startDate}
                         onChange={(e) => { setStartDate(e.target.value); }} />
                 </label>
-                        <label>Current Check out is {currentReservation.end_date}</label>
+                        <label>Current Check out is {currentReservation?.end_date}</label>
                 <label className='editBookingLabel'>
                     End Date
                     <input

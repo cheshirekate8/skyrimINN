@@ -23,7 +23,9 @@ function InnsFromLocationComponent() {
         return (
             <div className='location-div'>
                 <h1>The Inns Of {currentLocation?.name}</h1>
-                    {innsList.map(inn => <Link to={`/inns/${inn.id}`}>{inn.name}</Link>)}
+                <ul>
+                    {innsList.map(inn => <li><Link to={`/inns/${inn.id}`}>{inn.name}</Link></li>)}
+                </ul>
             </div>
         )
     } else {
