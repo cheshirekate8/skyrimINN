@@ -17,14 +17,14 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <Link to='/login' className="clearButtons" >
+        <Link to='/login' className="navLinks" >
           <i className="fas fa-feather">
-            <div className='clearButtonsText'>Login</div>
+            <div className='navLinksText'>Login</div>
           </i>
         </Link>
-        <Link to='/signup' className="clearButtons" >
+        <Link to='/signup' className="navLinks" >
           <i className="fas fa-feather-alt">
-            <div className='clearButtonsText'>Signup</div>
+            <div className='navLinksText'>Signup</div>
           </i>
         </Link>
       </>
@@ -34,9 +34,9 @@ function Navigation({ isLoaded }) {
   return (
     <nav>
       <div className='left-nav'>
-        <NavLink exact to="/">
-          <button className="clearButtons homeButton">
-            <i className="fas fa-dungeon soloButtons"></i>
+      <NavLink exact to="/">
+          <button className="navButtons">
+            <i className="fas fa-dungeon"></i>
           </button>
         </NavLink>
       </div>

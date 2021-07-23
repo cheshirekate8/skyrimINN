@@ -39,19 +39,11 @@ nav {
   margin-right: 15px;
 }
 
-.clearButtons {
+.navButtons {
   font-size: 20px;
   background-color: transparent;
   color: #f2f2f2;
   border: transparent;
-  font-family: "Arial";
-}
-
-.clearButtonsText {
-  font-family: "TrajanRegular";
-}
-
-.soloButtons {
   margin: 10px;
   font-size: 30px;
 }
@@ -73,4 +65,8 @@ nav {
 
 li {
   list-style: none;
+}
+
+.navLinksText {
+  font-family: "TrajanRegular";
 }

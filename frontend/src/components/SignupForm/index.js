@@ -1,12 +1,10 @@
-
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
+import { Link } from "react-router-dom";
 
 function SignupForm() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +27,9 @@ function SignupForm() {
   console.log(errors)
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <ul>
-      {/* hidden={!!errors}> */}
         {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label className='modal-label'>
@@ -41,7 +39,7 @@ function SignupForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
+          />
       </label>
       <label className='modal-label'>
         Username
@@ -50,7 +48,7 @@ function SignupForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-        />
+          />
       </label>
       <label className='modal-label'>
         Password
@@ -59,7 +57,7 @@ function SignupForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+          />
       </label>
       <label className='modal-label'>
         Confirm Password
@@ -68,10 +66,12 @@ function SignupForm() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-        />
+          />
       </label>
       <button className="clearButtons clearButtonsText formButton" type="submit">Sign Up</button>
     </form>
+    <Link to='/login'>Already have an account?</Link>
+          </>
   );
 }
 

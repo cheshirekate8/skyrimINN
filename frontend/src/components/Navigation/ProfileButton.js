@@ -35,8 +35,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button className='clearButtons' onClick={openMenu}>
-        <i className="fas fa-dragon soloButtons"></i>
+      <button className="navButtons" onClick={openMenu}>
+        <i className="fas fa-dragon"></i>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
