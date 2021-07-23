@@ -1,77 +1,76 @@
 nav {
-    display: grid;
-   background-color: #1B2026;
-    grid-template-columns: repeat(3, 1fr);
-    box-shadow: 2px 2px 15px #BFAF8F, -2px 2px 15px #BFAF8F;
-    width: 100vw;
-    height: 75px;
-    top: 0;
-    position: fixed;
-    z-index: 1;
+  display: grid;
+  background-color: #1b2026;
+  grid-template-columns: repeat(3, 1fr);
+  box-shadow: 2px 2px 15px #bfaf8f, -2px 2px 15px #bfaf8f;
+  width: 100vw;
+  height: 75px;
+  top: 0;
+  position: fixed;
+  z-index: 1;
 }
 
 .left-nav,
 .center-nav,
 .right-nav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .left-nav {
-    color: #F2F2F2;
-    grid-column: 1;
+  color: #f2f2f2;
+  grid-column: 1;
 }
 
 .center-nav {
-    grid-column: 2;
-    color: #F2F2F2;
-    font-size: 40px;
-    font-family: 'MagicCards';
-    justify-content: center;
-    padding-top: .3em;
-
+  grid-column: 2;
+  color: #f2f2f2;
+  font-size: 40px;
+  font-family: "MagicCards";
+  justify-content: center;
+  padding-top: 0.3em;
 }
 
 .right-nav {
-    color: #F2F2F2;
-    grid-column: 3;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    margin-right: 15px;
+  color: #f2f2f2;
+  grid-column: 3;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  margin-right: 15px;
 }
 
 .clearButtons {
-    font-size: 20px;
-    background-color: transparent;
-    color: #F2F2F2;
-    border: transparent;
-    font-family: 'Arial';
+  font-size: 20px;
+  background-color: transparent;
+  color: #f2f2f2;
+  border: transparent;
+  font-family: "Arial";
 }
 
 .clearButtonsText {
-    font-family: 'TrajanRegular';
+  font-family: "TrajanRegular";
 }
 
 .soloButtons {
-    margin: 10px;
-    font-size: 30px;
+  margin: 10px;
+  font-size: 30px;
 }
 
 .formButton {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .profile-dropdown {
-    position: absolute;
-    top: 75px;
-    right: 0px;
-    background-color: #080B0D;
-    margin: 0px;
-    padding: 15px;
-    border: 6px double #BFAF8F;
-    z-index: 0;
+  position: absolute;
+  top: 75px;
+  right: 0px;
+  background-color: #080b0d;
+  margin: 0px;
+  padding: 15px;
+  border: 6px double #bfaf8f;
+  z-index: 0;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }

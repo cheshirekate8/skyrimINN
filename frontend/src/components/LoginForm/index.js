@@ -1,10 +1,9 @@
-// frontend/src/components/LoginFormModal/LoginForm.js
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-function LoginForm() {
+function LoginForm({onClose}) {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -48,6 +47,7 @@ function LoginForm() {
         />
       </label>
       <button className="clearButtons clearButtonsText formButton" type="submit">Log In</button>
+      <button onClick={()=>console.log('Demo User')}>Demo User</button>
     </form>
   );
 }

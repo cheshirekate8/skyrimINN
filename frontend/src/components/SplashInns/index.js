@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route, useParams } from 'react-router-dom';
-import { getRecentInns } from '../../store/inns';
+import * as innActions from "../../store/inns"
 import './SplashInns.css';
 
 const InnsComponent = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getRecentInns())
+        dispatch(innActions.getInns())
+        dispatch(innActions.getRecentInns())
     }, [dispatch])
 
     const recentInns = useSelector(state => state.inns.recentList)

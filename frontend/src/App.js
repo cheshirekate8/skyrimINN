@@ -16,9 +16,8 @@ import InnsFromLocationComponent from "./components/LocationPage";
 import MyReservationsComponent from "./components/MyReservations";
 import EditUserForm from "./components/EditUserForm";
 import EditReservationForm from "./components/EditReservationForm";
-
-import { getReservationsFromUserId } from "./store/reservations";
-import { getRecentInns } from "./store/inns";
+import SignupForm from "./components/SignupForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +47,14 @@ function App() {
               {!user ? <Redirect to="/" /> : null}
               <MyReservationsComponent isLoaded={isLoaded} />
               <InnsComponent isLoaded={isLoaded} />
+            </Route>
+            <Route path='/signup'>
+              {user ? <Redirect to="/home" /> : null}
+              <SignupForm />
+            </Route>
+            <Route path='/login'>
+              {user ? <Redirect to="/home" /> : null}
+              <LoginForm />
             </Route>
             <Route path='/inns/:id'>
               <InnPageComponent isLoaded={isLoaded} />

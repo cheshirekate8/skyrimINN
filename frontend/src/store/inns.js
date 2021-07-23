@@ -71,7 +71,7 @@ const innsReducer = (state = initialState, action) => {
                 recentInns[inn.id] = inn;
             });
             return {
-                ...recentInns,
+                // ...recentInns,
                 ...state,
                 recentList: action.recentList,
             };
