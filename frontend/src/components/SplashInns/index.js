@@ -10,6 +10,7 @@ const InnsComponent = () => {
     useEffect(() => {
         dispatch(innActions.getInns())
         dispatch(innActions.getRecentInns())
+        dispatch(innActions.clearCurrentInn())
     }, [dispatch])
 
     const recentInns = useSelector(state => state.inns.recentList)

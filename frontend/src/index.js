@@ -12,6 +12,9 @@ import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
 import * as innActions from './store/inns';
+import * as regionActions from './store/regions'
+import * as locationActions from './store/locations'
+import * as reservationActions from './store/reservations'
 
 const store = configureStore();
 
@@ -22,6 +25,9 @@ if (process.env.NODE_ENV !== "production") {
   window.store = store;
   window.sessionActions = sessionActions;
   window.innActions = innActions;
+  window.regionActions = regionActions;
+  window.locationActions = locationActions;
+  window.reservationActions = reservationActions;
 }
 
 function Root() {

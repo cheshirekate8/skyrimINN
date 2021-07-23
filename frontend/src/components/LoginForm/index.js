@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import DemoButton from "./DemoButton";
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -48,8 +49,8 @@ function LoginForm() {
                     />
                 </label>
                 <button className="clearButtons clearButtonsText formButton" type="submit">Log In</button>
-                <button onClick={() => console.log('Demo User')}>Demo User</button>
             </form>
+            <DemoButton />
             <Link to='/signup'>Need an account?</Link>
         </>
     );

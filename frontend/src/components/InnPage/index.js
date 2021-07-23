@@ -38,57 +38,63 @@ function InnPageComponent() {
         const user_id = parseInt(currentUser.id, 10);
         const inn_id = currentInn.id;
 
-            const payload = {
-                user_id,
-                inn_id,
-                start_date: startDate,
-                end_date: endDate,
-                price: 50
-            }
-
-            dispatch(newReservation(payload))
-
-            bookedTitle.innerHTML = 'Booked!!!'
-
-            setTimeout(() => {
-                history.push('/')
-            }, 2000)
+        const payload = {
+            user_id,
+            inn_id,
+            start_date: startDate,
+            end_date: endDate,
+            price: 50
         }
 
-    return (
-        <div className='innDiv'>
-            <h1 className='innTitle'>{currentInn?.name}</h1>
-            <form
-                className='bookingForm'
-                onSubmit={HandleSubmit}
-            >
-                <h2 id='bookedTitle'>Book Now!</h2>
-                <label className='bookingLabel'>
-                    Start Date
-                    <input
-                        type="date"
-                        value={startDate}
-                        min={today}
-                        onChange={(e) => {setStartDate(e.target.value);}} />
-                </label>
-                <label className='bookingLabel'>
-                    End Date
-                    <input
-                        type="date"
-                        value={endDate}
-                        min={today}
-                        onChange={(e) => { setEndDate(e.target.value) }} />
-                </label>
-                <div id='booking-button-div'>
-                    {currentUser ? (
-                        <button id='booking-button'>Confirm Booking</button>
-                    ):(
-                        <p>Please Signup or Login to book with {currentInn?.name}</p>
-                    )}
-                </div>
-            </form>
-        </div>
-    )
+        dispatch(newReservation(payload))
+
+        bookedTitle.innerHTML = 'Booked!!!'
+
+        setTimeout(() => {
+            history.push('/')
+        }, 2000)
+    }
+
+    if (currentInn) {
+        return (
+            <div className='innDiv'>
+                <h1 className='innTitle'>{currentInn?.name}</h1>
+                <form
+                    className='bookingForm'
+                    onSubmit={HandleSubmit}
+                >
+                    <h2 id='bookedTitle'>Book Now!</h2>
+                    <label className='bookingLabel'>
+                        Start Date
+                        <input
+                            type="date"
+                            value={startDate}
+                            min={today}
+                            onChange={(e) => { setStartDate(e.target.value); }} />
+                    </label>
+                    <label className='bookingLabel'>
+                        End Date
+                        <input
+                            type="date"
+                            value={endDate}
+                            min={today}
+                            onChange={(e) => { setEndDate(e.target.value) }} />
+                    </label>
+                    <div id='booking-button-div'>
+                        {currentUser ? (
+                            <button id='booking-button'>Confirm Booking</button>
+                        ) : (
+                            <p>Please Signup or Login to book with {currentInn?.name}</p>
+                        )}
+                    </div>
+                </form>
+            </div>
+        )
+    } else {
+        return (
+            <h1> Loading... </h1>
+        )
+    }
 }
 
 export default InnPageComponent;

@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD = 'api/inns/LOAD'
 const LOAD_RECENT = 'api/inns/LOAD_RECENT'
 const LOAD_ONE = 'api/inns/id'
+const CLEAR_CURRENT = 'api/inns/CURRENT'
 
 const load = (list) => ({
     type: LOAD,
@@ -17,6 +18,10 @@ const loadRecent = (recentList) => ({
 const loadOne = (inn) => ({
     type: LOAD_ONE,
     inn
+})
+
+const clearCurr = () => ({
+    type: CLEAR_CURRENT
 })
 
 export const getInns = () => async dispatch => {
@@ -46,6 +51,10 @@ export const getOneInn = (id) => async dispatch => {
       }
 }
 
+export const clearCurrentInn = () => async dispatch => {
+    dispatch(clearCurr())
+}
+
 const initialState = {
     list: [],
     recentList: [],
@@ -60,27 +69,24 @@ const innsReducer = (state = initialState, action) => {
                 allInns[inn.id] = inn;
             });
             return {
-                ...allInns,
+                // ...allInns,
                 ...state,
                 list: action.list,
             };
         }
         case LOAD_RECENT: {
-            const recentInns = {};
-            action.recentList.forEach(inn => {
-                recentInns[inn.id] = inn;
-            });
             return {
-                // ...recentInns,
                 ...state,
                 recentList: action.recentList,
             };
         }
         case LOAD_ONE: {
-            const newState = Object.assign({}, initialState);
-            newState.currentInn = action.inn;
-            return newState;
-
+            state.currentInn = action.inn;
+            return state;
+        }
+        case CLEAR_CURRENT: {
+            state.currentInn = null;
+            return state;
         }
         default:
             return state;
