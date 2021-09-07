@@ -85,11 +85,12 @@ function InnPageComponent() {
                         onChange={onChange}
                         startDate={startDate}
                         endDate={endDate}
-                        minDate={startDate}
+                        minDate={new Date()}
+                        monthsShown={2}
                         selectsRange
                         inline
                     />
-                    <p> Price = {(diffInDates * 10) > 0 ? (diffInDates * 10): `Calculating...`}</p>
+                    <p> Price = {(diffInDates * 10) > 0 ? `${(diffInDates * 10)} Septims`: `Calculating...`}</p>
                     <div id='booking-button-div'>
                         {currentUser ? (
                             <button id='booking-button'>Confirm Booking</button>

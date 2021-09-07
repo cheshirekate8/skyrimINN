@@ -20,7 +20,8 @@ router.get(
       const reservations = await Reservation.findAll({
         where: {
           user_id: req.params.id
-        }
+        },
+        include : Inn
       });
       return res.json(reservations)
     }),
