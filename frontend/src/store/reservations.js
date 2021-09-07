@@ -76,6 +76,7 @@ export const getOneReservation = (id) => async dispatch => {
 }
 
 export const updateReservation = (reservation) => async dispatch => {
+    // console.log(reservation)
     const response = await csrfFetch(`/api/reservations/${reservation.id}`, {
         method: 'PUT',
         headers: {

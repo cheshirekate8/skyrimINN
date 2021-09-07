@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import './InnPage.css'
 import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
@@ -7,6 +10,7 @@ import { newReservation } from '../../store/reservations';
 
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router';
+
 
 function InnPageComponent() {
     const dispatch = useDispatch()
@@ -20,8 +24,20 @@ function InnPageComponent() {
     const currentInn = useSelector(state => state.inns.currentInn);
     const currentUser = useSelector(state => state.session.user);
 
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
+
+    const onChange = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+        price = diffInDates * 10
+      };
+
+    let starterDate = new Date(startDate)
+    let enderDate = new Date(endDate)
+    let diffInDates = Math.ceil((enderDate - starterDate) / 1000 / 60 / 60 / 24)
+    let price = 0;
 
     const bookedTitle = document.getElementById('bookedTitle')
 
@@ -43,7 +59,7 @@ function InnPageComponent() {
             inn_id,
             start_date: startDate,
             end_date: endDate,
-            price: 50
+            price: price
         }
 
         dispatch(newReservation(payload))
@@ -64,22 +80,16 @@ function InnPageComponent() {
                     onSubmit={HandleSubmit}
                 >
                     <h2 id='bookedTitle'>Book Now!</h2>
-                    <label className='bookingLabel'>
-                        Start Date
-                        <input
-                            type="date"
-                            value={startDate}
-                            min={today}
-                            onChange={(e) => { setStartDate(e.target.value); }} />
-                    </label>
-                    <label className='bookingLabel'>
-                        End Date
-                        <input
-                            type="date"
-                            value={endDate}
-                            min={today}
-                            onChange={(e) => { setEndDate(e.target.value) }} />
-                    </label>
+                    <DatePicker
+                        selected={startDate}
+                        onChange={onChange}
+                        startDate={startDate}
+                        endDate={endDate}
+                        minDate={startDate}
+                        selectsRange
+                        inline
+                    />
+                    <p> Price = {(diffInDates * 10) > 0 ? (diffInDates * 10): `Calculating...`}</p>
                     <div id='booking-button-div'>
                         {currentUser ? (
                             <button id='booking-button'>Confirm Booking</button>

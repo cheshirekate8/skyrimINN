@@ -20,11 +20,8 @@ function EditReservationForm() {
     }, [dispatch, id]);
 
     const currentReservation = useSelector(state => state.reservations.currentReservation);
-    useEffect(() => {
-        dispatch(getOneInn(currentReservation?.inn_id))
-    }, [dispatch, currentReservation])
 
-    const currentInn = useSelector(state => state.inns.currentInn);
+    const currentInn = currentReservation?.Inn
 
     const [startDate, setStartDate] = useState(currentReservation?.start_date)
     const [endDate, setEndDate] = useState(currentReservation?.end_date)
