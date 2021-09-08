@@ -30,9 +30,10 @@ function MyReservationsComponent({ isLoaded }) {
                         className='single-reservation'
                         value={reservation.id}>
                             <h3 className='reservation-headers'>Reservation #{i + 1}</h3>
-                            <li>Inn: {inns[reservation?.inn_id]?.name}</li>
+                            <li>Inn: {reservation.Inn.name}</li>
                             <li>Start of Stay: {reservation?.start_date}</li>
                             <li>End of Stay: {reservation?.end_date}</li>
+                            <li>Cost: {reservation.price} Septims</li>
                             <Link to={`/reservation/edit/${reservation.id}`} type="submit">Edit Reservation</Link>
                         </div>
                     ))

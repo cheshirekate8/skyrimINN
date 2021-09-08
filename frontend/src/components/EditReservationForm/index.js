@@ -74,9 +74,9 @@ function EditReservationForm() {
 
         dispatch(updateReservation(payload));
 
-        // setTimeout(() => {
-        //     history.push('/')
-        // }, 2000)
+        setTimeout(() => {
+            history.push('/')
+        }, 2000)
     }
 
     return (
@@ -114,6 +114,7 @@ function EditReservationForm() {
                     selectsRange
                     inline
                 />
+                <p> Price = {(diffInDates * 10) > 0 ? `${(diffInDates * 10)} Septims`: `${currentReservation.price} Septims (Original cost)`}</p>
                 <div id='edit-booking-button-div'>
                     <button id='edit-booking-button'>Confirm Edit Reservation</button>
                 </div>

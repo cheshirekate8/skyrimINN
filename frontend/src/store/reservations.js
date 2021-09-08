@@ -113,8 +113,7 @@ const reservationsReducer = (state = initialState, action) => {
         case GET_RESERVATIONS: {
             const newState = {
                 ...state,
-                list: action.payload,
-                currentReservation: null
+                list: action.payload
             }
             return newState
         }
@@ -124,7 +123,6 @@ const reservationsReducer = (state = initialState, action) => {
                 currentReservation: action.payload
             }
             return newState;
-
         }
         default:
             return state;
