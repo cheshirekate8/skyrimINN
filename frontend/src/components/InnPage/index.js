@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './InnPage.css'
 import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
 import { newReservation } from '../../store/reservations';
-
-import { Redirect } from 'react-router';
 import { useHistory } from 'react-router';
 
 
@@ -54,6 +51,8 @@ function InnPageComponent() {
         const user_id = parseInt(currentUser.id, 10);
         const inn_id = currentInn.id;
 
+        price = diffInDates * 10
+
         const payload = {
             user_id,
             inn_id,
@@ -61,6 +60,8 @@ function InnPageComponent() {
             end_date: endDate,
             price: price
         }
+
+        console.log(payload)
 
         dispatch(newReservation(payload))
 

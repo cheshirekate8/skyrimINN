@@ -48,9 +48,12 @@ export const newReservation = payload => async dispatch => {
         body: JSON.stringify(payload),
     });
 
+    console.log('RESPONSE!!! ====> ', response)
+
     if (response.ok) {
         const reservation = await response.json();
         dispatch(addReservation(reservation));
+        dispatch(getReservationsFromUserId(payload.user_id))
         return reservation;
     }
 };
@@ -75,18 +78,20 @@ export const getOneReservation = (id) => async dispatch => {
       }
 }
 
-export const updateReservation = (reservation) => async dispatch => {
-    // console.log(reservation)
-    const response = await csrfFetch(`/api/reservations/${reservation.id}`, {
-        method: 'PUT',
+export const updateReservation = (payload) => async dispatch => {
+    const {id, user_id, start_date, end_date, price} = payload
+    const response = await csrfFetch(`/api/reservations/${id}`, {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(reservation),
+        body: JSON.stringify({ start_date, end_date, price }),
     });
     if (response.ok) {
         const reservation = await response.json();
         dispatch(editReservation(reservation));
+        dispatch(getReservationsFromUserId(user_id));
+        return reservation
       }
 
 }
@@ -108,7 +113,8 @@ const reservationsReducer = (state = initialState, action) => {
         case GET_RESERVATIONS: {
             const newState = {
                 ...state,
-                list: action.payload
+                list: action.payload,
+                currentReservation: null
             }
             return newState
         }

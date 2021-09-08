@@ -2,29 +2,37 @@ import './EditReservation.css'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneReservation, newReservation } from '../../store/reservations';
-import { getOneInn } from '../../store/inns';
-import { cancelReservation, updateReservation } from '../../store/reservations';
-import { Redirect } from 'react-router';
+import { getOneReservation, cancelReservation, updateReservation } from '../../store/reservations';
 import { useHistory } from 'react-router';
+import DatePicker from 'react-datepicker'
 
 function EditReservationForm() {
     const dispatch = useDispatch()
     const { id } = useParams();
     const history = useHistory();
 
-    const currentUser = useSelector(state => state.session.user);
-
     useEffect(() => {
         dispatch(getOneReservation(id))
     }, [dispatch, id]);
 
+    const currentUser = useSelector(state => state.session.user);
     const currentReservation = useSelector(state => state.reservations.currentReservation);
-
     const currentInn = currentReservation?.Inn
 
     const [startDate, setStartDate] = useState(currentReservation?.start_date)
     const [endDate, setEndDate] = useState(currentReservation?.end_date)
+
+    const onChange = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+        price = diffInDates * 10
+      };
+
+      let starterDate = new Date(startDate)
+      let enderDate = new Date(endDate)
+      let diffInDates = Math.ceil((enderDate - starterDate) / 1000 / 60 / 60 / 24)
+      let price = currentReservation?.price;
 
     const reservationTitle = document.getElementById('reservationTitle')
 
@@ -49,7 +57,22 @@ function EditReservationForm() {
     const HandleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(updateReservation(currentReservation));
+        const user_id = parseInt(currentUser.id, 10);
+        const inn_id = currentInn.id;
+
+        price = diffInDates * 10
+
+        const payload = {
+            id: currentReservation.id,
+            user_id,
+            start_date: startDate,
+            end_date: endDate,
+            price: price
+        }
+
+        console.log(payload)
+
+        dispatch(updateReservation(payload));
 
         // setTimeout(() => {
         //     history.push('/')
@@ -63,7 +86,7 @@ function EditReservationForm() {
                 className='editBookingForm'
                 onSubmit={HandleSubmit}
             >
-                <label>Current Check in is {currentReservation?.start_date}</label>
+                {/* <label>Current Check in is {currentReservation?.start_date}</label>
                 <label className='editBookingLabel'>
                     Start Date
                     <input
@@ -80,7 +103,17 @@ function EditReservationForm() {
                         value={endDate}
                         min={today}
                         onChange={(e) => { setEndDate(e.target.value) }} />
-                </label>
+                </label> */}
+                <DatePicker
+                    selected={startDate}
+                    onChange={onChange}
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={new Date()}
+                    monthsShown={2}
+                    selectsRange
+                    inline
+                />
                 <div id='edit-booking-button-div'>
                     <button id='edit-booking-button'>Confirm Edit Reservation</button>
                 </div>
