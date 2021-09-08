@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInns } from '../../store/inns';
+import { clearCurrentRes } from '../../store/reservations';
 import './MyReservations.css';
 import { Link } from 'react-router-dom';
 import { getReservationsFromUserId } from '../../store/reservations';
@@ -10,6 +11,7 @@ function MyReservationsComponent({ isLoaded }) {
 
     useEffect(() => {
         dispatch(getInns());
+        dispatch(clearCurrentRes())
     }, [dispatch])
 
     const inns = useSelector(state => state.inns)

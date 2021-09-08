@@ -5,6 +5,7 @@ const GET_RESERVATIONS = 'reservations/get'
 const LOAD_ONE = 'reservations/get/one'
 const CANCEL = 'reservations/cancel'
 const EDIT ='reservations/edit'
+const CLEAR_CURRENT_RES = 'reservations/CURRENT'
 
 const editReservation = (payload) => ({
     type: EDIT,
@@ -28,6 +29,10 @@ const loadOne = (payload) => ({
 
 const cancel = (reservation) => ({
     type: CANCEL
+})
+
+const clearCurr = () => ({
+    type: CLEAR_CURRENT_RES
 })
 
 export const cancelReservation = (id) => async (dispatch) => {
@@ -96,6 +101,10 @@ export const updateReservation = (payload) => async dispatch => {
 
 }
 
+export const clearCurrentRes = () => async dispatch => {
+    dispatch(clearCurr())
+}
+
 const initialState = {
     list: [],
     currentReservation: null
@@ -103,13 +112,6 @@ const initialState = {
 
 const reservationsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_RESERVATION: {
-            const newState = {
-                ...state,
-                reservation: action.payload
-            }
-            return newState
-        }
         case GET_RESERVATIONS: {
             const newState = {
                 ...state,
@@ -123,6 +125,10 @@ const reservationsReducer = (state = initialState, action) => {
                 currentReservation: action.payload
             }
             return newState;
+        }
+        case CLEAR_CURRENT_RES: {
+            state.currentReservation = null;
+            return state;
         }
         default:
             return state;

@@ -42,7 +42,7 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           <li className='clearButtonsText'>{user.username}</li>
           <li className='clearButtonsText'>{user.email}</li>
-          <li><Link to={`user/edit/${sessionUser.id}`}>Edit User</Link></li>
+          {/* <li><Link to={`user/edit/${sessionUser.id}`}>Edit User</Link></li> */}
           <li>
             <button className='clearButtons logoutButton' onClick={logout}>
               <div className='clearButtonsText'>

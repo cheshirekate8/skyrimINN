@@ -31,7 +31,10 @@ router.get(
     '/:id(\\d+)',
     asyncHandler(async (req, res) => {
       const reservations = await Reservation.findByPk(req.params.id, {
-        include: Inn
+        include: {
+          model: Inn,
+          include: Reservation
+        }
       });
       return res.json(reservations)
     }),

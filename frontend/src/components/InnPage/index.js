@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
 import { newReservation } from '../../store/reservations';
 import { useHistory } from 'react-router';
+import { csrfFetch } from '../../store/csrf';
 
 
 function InnPageComponent() {
@@ -29,7 +30,7 @@ function InnPageComponent() {
         setStartDate(start);
         setEndDate(end);
         price = diffInDates * 10
-      };
+    };
 
     let starterDate = new Date(startDate)
     let enderDate = new Date(endDate)
@@ -51,7 +52,7 @@ function InnPageComponent() {
         const user_id = parseInt(currentUser.id, 10);
         const inn_id = currentInn.id;
 
-        price = diffInDates * 10
+        price = diffInDates * currentInn.price
 
         const payload = {
             user_id,
@@ -72,6 +73,22 @@ function InnPageComponent() {
         }, 2000)
     }
 
+    let dateArray = [];
+
+    currentInn?.Reservations.forEach(reservation => {
+
+        let start = new Date(reservation.start_date)
+        let end = new Date(reservation.end_date)
+
+        while (start <= end) {
+            dateArray.push(start)
+            start = new Date(start.setDate(start.getDate() + 1))
+        }
+
+    })
+
+    console.log(dateArray)
+
     if (currentInn) {
         return (
             <div className='innDiv'>
@@ -88,10 +105,11 @@ function InnPageComponent() {
                         endDate={endDate}
                         minDate={new Date()}
                         monthsShown={2}
+                        excludeDates={dateArray}
                         selectsRange
                         inline
                     />
-                    <p> Price = {(diffInDates * 10) > 0 ? `${(diffInDates * 10)} Septims`: `Calculating...`}</p>
+                    <p> Price = {(diffInDates * 10) > 0 ? `${(diffInDates * 10)} Septims` : `Calculating...`}</p>
                     <div id='booking-button-div'>
                         {currentUser ? (
                             <button id='booking-button'>Confirm Booking</button>
