@@ -1,5 +1,4 @@
 .locationsOuterDiv {
-    color: #f2f2f2;
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 3fr 1fr;

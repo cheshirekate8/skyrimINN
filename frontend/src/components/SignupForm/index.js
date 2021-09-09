@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { Link } from "react-router-dom";
+import './form.css'
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function SignupForm() {
   };
 
   return (
-    <>
+    <div className='formDiv'>
     <form onSubmit={handleSubmit}>
       <ul>
         {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -69,7 +70,7 @@ function SignupForm() {
       <button className="clearButtons clearButtonsText formButton" type="submit">Sign Up</button>
     </form>
     <Link to='/login'>Already have an account?</Link>
-          </>
+          </div>
   );
 }
 

@@ -19,18 +19,20 @@ function MyReservationsComponent({ isLoaded }) {
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
-      dispatch(getReservationsFromUserId(user?.id));
+        dispatch(getReservationsFromUserId(user?.id));
     }, [dispatch, user])
 
 
-        return isLoaded && (
-            <div className='reservations-div'>
-                <h2>My Reservations</h2>
+    return isLoaded && (
+        <div className='reservations-div'>
+            <h2>My Reservations</h2>
+            <div className='reservations-only'>
+
                 {reservations.length > 0 ? (
                     reservations?.map((reservation, i) => (
                         <div
-                        className='single-reservation'
-                        value={reservation.id}>
+                            className='single-reservation'
+                            value={reservation.id}>
                             <h3 className='reservation-headers'>Reservation #{i + 1}</h3>
                             <li>Inn: {reservation.Inn.name}</li>
                             <li>Start of Stay: {reservation?.start_date}</li>
@@ -43,7 +45,8 @@ function MyReservationsComponent({ isLoaded }) {
                     <p>You have no reservations!</p>
                 )}
             </div>
-        )
+        </div>
+    )
 }
 
 export default MyReservationsComponent
