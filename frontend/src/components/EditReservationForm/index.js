@@ -94,7 +94,7 @@ function EditReservationForm() {
     console.log(dateArray)
 
     return (
-        <div id='reservationDiv'>
+        <div id='innDiv'>
             <h1 id='reservationTitle'>Edit your reservation for {currentInn?.name}</h1>
             <form
                 className='editBookingForm'
