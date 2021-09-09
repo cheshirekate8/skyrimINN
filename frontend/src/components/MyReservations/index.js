@@ -43,7 +43,7 @@ function MyReservationsComponent({ isLoaded }) {
         <div className='reservations-div'>
             <h2>My Future Reservations</h2>
             <div className='reservations-only'>
-                {reservations.length > 0 ? (
+                {futureReservations.length > 0 ? (
                     (futureReservations?.map((reservation, i) => (
                         <div
                             className='single-reservation'
@@ -62,7 +62,7 @@ function MyReservationsComponent({ isLoaded }) {
             </div>
             <h2>My Past Reservations</h2>
             <div className='reservations-only'>
-                {reservations.length > 0 ? (
+                {pastReservations.length > 0 ? (
                     (pastReservations?.map((reservation, i) => (
                         <div
                             className='single-reservation'
