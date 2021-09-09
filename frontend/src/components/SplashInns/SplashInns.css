@@ -1,5 +1,4 @@
 .innsOuterDiv {
-    color: #f2f2f2;
     display: grid;
     grid-template-columns: 50px repeat(5, 1fr) 50px;
     grid-template-rows: 20px repeat(5, 1fr) 20px;

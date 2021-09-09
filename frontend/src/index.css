@@ -25,6 +25,9 @@ body {
   background-color: #080B0D;
   position: relative;
   top: 75px;
+  color: #f2f2f2;
+  font-family: 'TrajanRegular';
+  text-align: center;
 }
 
 body::-webkit-scrollbar {
@@ -66,4 +69,16 @@ a:hover {
 
 a:active {
   text-decoration: underline;
+}
+
+label {
+  color: #f2f2f2;
+  font-family: 'TrajanRegular';
+}
+
+button {
+  font-family: 'TrajanRegular';
+  font-size: 1.25em;
+  color: #f2f2f2;
+  background-color: transparent;
 }

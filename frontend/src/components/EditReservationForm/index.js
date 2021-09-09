@@ -2,32 +2,38 @@ import './EditReservation.css'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { getOneReservation, newReservation } from '../../store/reservations';
+import { getOneReservation, cancelReservation, updateReservation } from '../../store/reservations';
 import { getOneInn } from '../../store/inns';
-import { cancelReservation, updateReservation } from '../../store/reservations';
-import { Redirect } from 'react-router';
 import { useHistory } from 'react-router';
+import DatePicker from 'react-datepicker'
 
 function EditReservationForm() {
     const dispatch = useDispatch()
     const { id } = useParams();
     const history = useHistory();
 
-    const currentUser = useSelector(state => state.session.user);
-
     useEffect(() => {
         dispatch(getOneReservation(id))
     }, [dispatch, id]);
 
+    const currentUser = useSelector(state => state.session.user);
     const currentReservation = useSelector(state => state.reservations.currentReservation);
-    useEffect(() => {
-        dispatch(getOneInn(currentReservation?.inn_id))
-    }, [dispatch, currentReservation])
-
-    const currentInn = useSelector(state => state.inns.currentInn);
+    const currentInn = currentReservation?.Inn
 
     const [startDate, setStartDate] = useState(currentReservation?.start_date)
     const [endDate, setEndDate] = useState(currentReservation?.end_date)
+
+    const onChange = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+        price = diffInDates * 10
+      };
+
+      let starterDate = new Date(startDate)
+      let enderDate = new Date(endDate)
+      let diffInDates = Math.ceil((enderDate - starterDate) / 1000 / 60 / 60 / 24)
+      let price = currentReservation?.price;
 
     const reservationTitle = document.getElementById('reservationTitle')
 
@@ -52,38 +58,60 @@ function EditReservationForm() {
     const HandleSubmit = async (e) => {
         e.preventDefault();
 
-        dispatch(updateReservation(currentReservation));
+        const user_id = parseInt(currentUser.id, 10);
 
-        // setTimeout(() => {
-        //     history.push('/')
-        // }, 2000)
+        price = diffInDates * currentReservation.Inn.price
+
+        const payload = {
+            id: currentReservation.id,
+            user_id,
+            start_date: startDate,
+            end_date: endDate,
+            price: price
+        }
+
+        dispatch(updateReservation(payload));
+
+        setTimeout(() => {
+            history.push('/')
+        }, 2000)
     }
 
+    let dateArray = [];
+
+    currentInn?.Reservations.forEach(reservation => {
+
+        let start = new Date(reservation.start_date)
+        let end = new Date(reservation.end_date)
+
+        while (start <= end) {
+            dateArray.push(start)
+            start = new Date(start.setDate(start.getDate() + 1))
+        }
+
+    })
+
+    console.log(dateArray)
+
     return (
-        <div id='reservationDiv'>
+        <div id='innDiv'>
             <h1 id='reservationTitle'>Edit your reservation for {currentInn?.name}</h1>
             <form
                 className='editBookingForm'
                 onSubmit={HandleSubmit}
             >
-                <label>Current Check in is {currentReservation?.start_date}</label>
-                <label className='editBookingLabel'>
-                    Start Date
-                    <input
-                        type="date"
-                        value={startDate}
-                        min={today}
-                        onChange={(e) => { setStartDate(e.target.value); }} />
-                </label>
-                        <label>Current Check out is {currentReservation?.end_date}</label>
-                <label className='editBookingLabel'>
-                    End Date
-                    <input
-                        type="date"
-                        value={endDate}
-                        min={today}
-                        onChange={(e) => { setEndDate(e.target.value) }} />
-                </label>
+                <DatePicker
+                    selected={startDate}
+                    onChange={onChange}
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={new Date()}
+                    monthsShown={2}
+                    excludeDates={dateArray}
+                    selectsRange
+                    inline
+                />
+                <p> Price = {(diffInDates * 10) > 0 ? `${(diffInDates * 10)} Septims`: `${currentReservation?.price} Septims (Original cost)`}</p>
                 <div id='edit-booking-button-div'>
                     <button id='edit-booking-button'>Confirm Edit Reservation</button>
                 </div>

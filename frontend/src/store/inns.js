@@ -3,7 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD = 'api/inns/LOAD'
 const LOAD_RECENT = 'api/inns/LOAD_RECENT'
 const LOAD_ONE = 'api/inns/id'
-const CLEAR_CURRENT = 'api/inns/CURRENT'
+const CLEAR_CURRENT_INN = 'api/inns/CURRENT'
 
 const load = (list) => ({
     type: LOAD,
@@ -21,7 +21,7 @@ const loadOne = (inn) => ({
 })
 
 const clearCurr = () => ({
-    type: CLEAR_CURRENT
+    type: CLEAR_CURRENT_INN
 })
 
 export const getInns = () => async dispatch => {
@@ -58,7 +58,7 @@ export const clearCurrentInn = () => async dispatch => {
 const initialState = {
     list: [],
     recentList: [],
-    currentInn: null,
+    currentInn: null
   };
 
 const innsReducer = (state = initialState, action) => {
@@ -84,10 +84,11 @@ const innsReducer = (state = initialState, action) => {
             state.currentInn = action.inn;
             return state;
         }
-        case CLEAR_CURRENT: {
+        case CLEAR_CURRENT_INN: {
             state.currentInn = null;
             return state;
         }
+
         default:
             return state;
     }

@@ -5,6 +5,7 @@ const GET_RESERVATIONS = 'reservations/get'
 const LOAD_ONE = 'reservations/get/one'
 const CANCEL = 'reservations/cancel'
 const EDIT ='reservations/edit'
+const CLEAR_CURRENT_RES = 'reservations/CURRENT'
 
 const editReservation = (payload) => ({
     type: EDIT,
@@ -30,6 +31,10 @@ const cancel = (reservation) => ({
     type: CANCEL
 })
 
+const clearCurr = () => ({
+    type: CLEAR_CURRENT_RES
+})
+
 export const cancelReservation = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/reservations/${id}`, {
         method: 'DELETE'
@@ -48,9 +53,12 @@ export const newReservation = payload => async dispatch => {
         body: JSON.stringify(payload),
     });
 
+    console.log('RESPONSE!!! ====> ', response)
+
     if (response.ok) {
         const reservation = await response.json();
         dispatch(addReservation(reservation));
+        dispatch(getReservationsFromUserId(payload.user_id))
         return reservation;
     }
 };
@@ -75,19 +83,26 @@ export const getOneReservation = (id) => async dispatch => {
       }
 }
 
-export const updateReservation = (reservation) => async dispatch => {
-    const response = await csrfFetch(`/api/reservations/${reservation.id}`, {
-        method: 'PUT',
+export const updateReservation = (payload) => async dispatch => {
+    const {id, user_id, start_date, end_date, price} = payload
+    const response = await csrfFetch(`/api/reservations/${id}`, {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(reservation),
+        body: JSON.stringify({ start_date, end_date, price }),
     });
     if (response.ok) {
         const reservation = await response.json();
         dispatch(editReservation(reservation));
+        dispatch(getReservationsFromUserId(user_id));
+        return reservation
       }
 
+}
+
+export const clearCurrentRes = () => async dispatch => {
+    dispatch(clearCurr())
 }
 
 const initialState = {
@@ -97,13 +112,6 @@ const initialState = {
 
 const reservationsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_RESERVATION: {
-            const newState = {
-                ...state,
-                reservation: action.payload
-            }
-            return newState
-        }
         case GET_RESERVATIONS: {
             const newState = {
                 ...state,
@@ -117,7 +125,10 @@ const reservationsReducer = (state = initialState, action) => {
                 currentReservation: action.payload
             }
             return newState;
-
+        }
+        case CLEAR_CURRENT_RES: {
+            state.currentReservation = null;
+            return state;
         }
         default:
             return state;

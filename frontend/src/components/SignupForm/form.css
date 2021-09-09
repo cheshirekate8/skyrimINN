@@ -1,0 +1,25 @@
+form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formDiv {
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+a {
+    padding: 10px;
+}
+
+button {
+    margin: 5px;
+    padding: 5px;
+}

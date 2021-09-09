@@ -3,6 +3,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DemoButton from "./DemoButton";
+import '../SignupForm/form.css'
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function LoginForm() {
     };
 
     return (
-        <>
+        <div className='formDiv'>
             <form onSubmit={handleSubmit}>
                 <ul>
                     {/* hidden={!!errors}> */}
@@ -52,7 +53,7 @@ function LoginForm() {
             </form>
             <DemoButton />
             <Link to='/signup'>Need an account?</Link>
-        </>
+        </div>
     );
 }
 

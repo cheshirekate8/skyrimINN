@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Inn } = require('../../db/models');
+const { Inn, Reservation } = require('../../db/models');
 
 const router = express.Router();
 
@@ -25,8 +25,23 @@ router.get(
   router.get(
     '/:id(\\d+)',
     asyncHandler(async (req, res) => {
-      const inn = await Inn.findByPk(req.params.id)
+      const inn = await Inn.findByPk(req.params.id, {
+        include: Reservation
+      })
       return res.json(inn)
+  }),
+)
+
+//GET ALL OF AN INNS RESERVATIONS
+router.get(
+    '/:id(\\d+)/avail',
+    asyncHandler(async (req, res) => {
+      const reservations = await Reservation.findAll({
+        where: {
+          inn_id: req.params.id
+        }
+      })
+      return res.json(reservations)
   }),
 )
 
