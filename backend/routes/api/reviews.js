@@ -62,7 +62,7 @@ router.patch(
   asyncHandler(async (req, res, next) => {
     const review_id = parseInt(req.params.id, 10);
     const review = await Review.findByPk(review_id);
-    const {user_id, inn_id, reservation_id, rating, comment} = req.body;
+    const { rating, comment} = req.body;
 
     if (review) {
       await review.update({rating, comment})
