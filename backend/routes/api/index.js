@@ -8,6 +8,7 @@ const innsRouter = require('./inns.js');
 const regionsRouter = require('./regions.js')
 const locationsRouter = require('./locations.js')
 const reservationsRouter = require('./reservations.js')
+const reviewsRouter = require('./reviews.js')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -15,6 +16,7 @@ router.use('/inns', innsRouter);
 router.use('/regions', regionsRouter);
 router.use('/locations', locationsRouter)
 router.use('/reservations', reservationsRouter)
+router.use('/reviews', reviewsRouter)
 
 module.exports = router;
 

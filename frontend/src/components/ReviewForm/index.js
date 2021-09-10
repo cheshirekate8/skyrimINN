@@ -1,0 +1,103 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import * as sessionActions from "../../store/session";
+import './EditUser.css'
+import { deleteUser } from "../../store/session";
+import { useHistory } from "react-router";
+
+function ReviewForm() {
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        dispatch(getOneReservation(id))
+    }, [dispatch, id]);
+
+    const currentUser = useSelector(state => state.session.user);
+    const currentReservation = useSelector(state => state.reservations.currentReservation);
+    const currentInn = currentReservation?.Inn
+
+    const [rating, setRating] = useState(null);
+    const [comment, setComment] = useState("");
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const user = {
+            user_id: currentUser.id,
+            inn_id: currentInn.id,
+            reservation_id: currentReservation.id,
+            rating: rating,
+            comment: comment
+        }
+
+
+        //! THIS IS WHERE I LEFT OFF WRITING
+
+        dispatch(sessionActions.updateUser(user))
+            .catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
+
+        if (errors.length === 0) {
+            history.push('/')
+        }
+    };
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+
+        dispatch(deleteUser(id))
+    }
+
+    return (
+        <div className='edit-user-div'>
+            <h2 id='edit-user-header'>Edit User</h2>
+            <form onSubmit={handleSubmit}>
+                <ul>
+                    {/* hidden={!!errors}> */}
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+                <label>
+                    Email
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Username
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Password
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </label>
+                <button type="submit">Confirm Edit User</button>
+            </form>
+            <form onSubmit={handleDelete}>
+                <button type="submit" id='deleteUserButton' >Delete User</button>
+            </form>
+        </div>
+    );
+}
+
+export default ReviewForm;
