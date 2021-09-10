@@ -27,7 +27,7 @@ const loadOneReview = (payload) => ({
     payload
 })
 
-const deleteReview = (review) => ({
+const deleteRev = () => ({
     type: CANCEL_REVIEW
 })
 
@@ -40,7 +40,7 @@ export const deleteReview = (id) => async (dispatch) => {
         method: 'DELETE'
     })
     const data = await response.json();
-    dispatch(deleteReview(data.review));
+    dispatch(deleteRev(data.review));
     return 'DELETED'
 }
 
@@ -82,8 +82,8 @@ export const getOneReview = (id) => async dispatch => {
 }
 
 export const updateReview = (payload) => async dispatch => {
-    const { rating, comment } = payload
-    const response = await csrfFetch(`/api/reviews/${id}`, {
+    const { review_id, inn_id, rating, comment } = payload
+    const response = await csrfFetch(`/api/reviews/${review_id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ export const updateReview = (payload) => async dispatch => {
     if (response.ok) {
         const review = await response.json();
         dispatch(editReview(review));
-        dispatch(getReviewsFromInnId(user_id));
+        dispatch(getReviewsFromInnId(inn_id));
         return review
       }
 
