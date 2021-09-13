@@ -5,9 +5,11 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './InnPage.css'
 import { useParams } from 'react-router';
 import { getOneInn } from '../../store/inns';
-import { newReservation } from '../../store/reservations';
+import { getReviewsFromInnId } from '../../store/reviews';
+import reservationsReducer, { newReservation } from '../../store/reservations';
 import { useHistory } from 'react-router';
 import { csrfFetch } from '../../store/csrf';
+import ReviewsComponent from '../ReviewsComponent';
 
 
 function InnPageComponent() {
@@ -17,10 +19,12 @@ function InnPageComponent() {
 
     useEffect(() => {
         dispatch(getOneInn(id))
+        dispatch(getReviewsFromInnId(id))
     }, [dispatch, id])
 
     const currentInn = useSelector(state => state.inns.currentInn);
     const currentUser = useSelector(state => state.session.user);
+    const reviews = useSelector(state => state.reviews.list);
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
@@ -75,7 +79,7 @@ function InnPageComponent() {
 
     let dateArray = [];
 
-    currentInn?.Reservations.forEach(reservation => {
+    currentInn?.Reservations?.forEach(reservation => {
 
         let start = new Date(reservation.start_date)
         let end = new Date(reservation.end_date)
@@ -87,12 +91,19 @@ function InnPageComponent() {
 
     })
 
-    console.log(dateArray)
+        let ratingsArray = [];
+
+        reviews.forEach(review => {
+            ratingsArray.push(review.rating)
+        })
+
+
 
     if (currentInn) {
         return (
             <div className='innDiv'>
                 <h1 className='innTitle'>{currentInn?.name}</h1>
+                <h3>Rating : {ratingsArray.length > 0 ? ratingsArray.reduce((a, b) => a + b) / ratingsArray.length : 'No Reviews Yet'}</h3>
                 <form
                     className='bookingForm'
                     onSubmit={HandleSubmit}
@@ -118,6 +129,15 @@ function InnPageComponent() {
                         )}
                     </div>
                 </form>
+                {reviews && reviews.map(review => (
+                    <div className="singleReview">
+                        <ul>
+                            <li>User: { review.User.username}</li>
+                            <li>Rating: {review.rating}</li>
+                            <li>{review.comment}</li>
+                        </ul>
+                    </div>
+                ))}
             </div>
         )
     } else {

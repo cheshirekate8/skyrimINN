@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Reservation, Inn, Review } = require('../../db/models')
+const { Reservation, Inn, Review, User } = require('../../db/models')
 
 const router = express.Router();
 
@@ -19,11 +19,11 @@ router.get(
 router.get(
     '/inn/:id',
     asyncHandler(async (req, res) => {
-      const reviews = await Reservation.findAll({
+      const reviews = await Review.findAll({
         where: {
           inn_id: req.params.id
         },
-        include : Inn
+        include : User
       });
       return res.json(reviews)
     }),
