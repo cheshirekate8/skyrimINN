@@ -48,6 +48,8 @@ function App() {
               {!user ? <Redirect to="/" /> : null}
               <MyReservationsComponent isLoaded={isLoaded} />
               <InnsComponent isLoaded={isLoaded} />
+              <RegionsComponent isLoaded={isLoaded} />
+              <LocationsComponent isLoaded={isLoaded} />
             </Route>
             <Route path='/signup'>
               {user ? <Redirect to="/home" /> : null}
