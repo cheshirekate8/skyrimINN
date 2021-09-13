@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 100px;
+    /* padding: 100px; */
 }
 
 .bookingForm {
@@ -18,4 +18,8 @@
 .bookingLabel {
     width: 30vw;
     justify-content: space-between;
+}
+
+.singleReview {
+    padding: 20px 200px;
 }

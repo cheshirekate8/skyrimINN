@@ -18,6 +18,22 @@ function MyReservationsComponent({ isLoaded }) {
     const reservations = useSelector(state => state.reservations.list)
     const user = useSelector(state => state.session.user);
 
+    let futureReservations = []
+    let pastReservations = []
+    let today = new Date()
+
+    reservations.forEach(reservation => {
+        let endDate = new Date(reservation.end_date)
+        if (endDate < today) {
+            pastReservations.push(reservation)
+        } else {
+            futureReservations.push(reservation)
+        }
+    })
+
+    console.log('FUTURE ===>', futureReservations)
+    console.log('PAST ===>', pastReservations)
+
     useEffect(() => {
         dispatch(getReservationsFromUserId(user?.id));
     }, [dispatch, user])
@@ -25,11 +41,10 @@ function MyReservationsComponent({ isLoaded }) {
 
     return isLoaded && (
         <div className='reservations-div'>
-            <h2>My Reservations</h2>
+            <h2>My Future Reservations</h2>
             <div className='reservations-only'>
-
-                {reservations.length > 0 ? (
-                    reservations?.map((reservation, i) => (
+                {futureReservations.length > 0 ? (
+                    (futureReservations?.map((reservation, i) => (
                         <div
                             className='single-reservation'
                             value={reservation.id}>
@@ -39,7 +54,26 @@ function MyReservationsComponent({ isLoaded }) {
                             <li>End of Stay: {reservation?.end_date}</li>
                             <li>Cost: {reservation.price} Septims</li>
                             <Link to={`/reservation/edit/${reservation.id}`} type="submit">Edit Reservation</Link>
-                        </div>
+                        </div>)
+                    ))
+                ) : (
+                    <p>You have no reservations!</p>
+                )}
+            </div>
+            <h2>My Past Reservations</h2>
+            <div className='reservations-only'>
+                {pastReservations.length > 0 ? (
+                    (pastReservations?.map((reservation, i) => (
+                        <div
+                            className='single-reservation'
+                            value={reservation.id}>
+                            <h3 className='reservation-headers'>Reservation #{i + 1}</h3>
+                            <li>Inn: {reservation.Inn.name}</li>
+                            <li>Start of Stay: {reservation?.start_date}</li>
+                            <li>End of Stay: {reservation?.end_date}</li>
+                            <li>Cost: {reservation.price} Septims</li>
+                            <Link to={`/review/${reservation.id}`} type="submit">Review Your Stay</Link>
+                        </div>)
                     ))
                 ) : (
                     <p>You have no reservations!</p>
