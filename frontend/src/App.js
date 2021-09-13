@@ -18,6 +18,7 @@ import EditUserForm from "./components/EditUserForm";
 import EditReservationForm from "./components/EditReservationForm";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
+import ReviewForm from "./components/ReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,9 @@ function App() {
             </Route>
             <Route path='/reservation/edit/:id'>
               <EditReservationForm />
+            </Route>
+            <Route path='/review/:id'>
+              <ReviewForm />
             </Route>
           </Switch>
         </div>
